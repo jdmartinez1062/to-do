@@ -1,3 +1,5 @@
+import idAble from "./idAble";
+
 const tabCreation = () => {
   const navigation = document.createElement("nav");
   const tabList = document.createElement("ul");
@@ -12,13 +14,13 @@ const tabCreation = () => {
 
   for (let i = 0; i < info.length; i += 1) {
     list = document.createElement("li");
-    info[i].id = info[i].textContent.split(" ").join().toLowerCase();
+    info[i].id = idAble(info[i].textContent);
     list.appendChild(info[i]);
     tabList.append(list);
   }
 
   navigation.appendChild(tabList);
-  document.getElementsByTagName("body").appendChild(navigation);
+  return navigation
 };
 
 const tabUpdate = (project, deleteP = false) => {
@@ -29,13 +31,13 @@ const tabUpdate = (project, deleteP = false) => {
 
     pName.textContent = project.title;
     pList = document.createElement("li");
-    pName.id = pName.textContent.split(" ").join().toLowerCase();
+    pName.id = idAble(pName.textContent);
     pList.appendChild(pName);
     tabList.appendChild(pList);
     navigation.appendChild(pList);
   } else {
     const projectD = document.getElementById(
-      project.title.split(" ").join().toLowerCase()
+      idAble(project.title)
     );
     projectD.remove;
     // localStorage.removeItem("Project" + project.id);

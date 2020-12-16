@@ -1,20 +1,13 @@
-ToDo = (title, description, dueDate, priority, notes, checkList) => {
-  const changeStatus = (object) => {
-    if ((status = object.status)) {
-      status = true;
-    } else {
-      status = false;
-    }
-  };
-
+const ToDo = (title, description, dueDate, priority, notes, checkList = []) => {
   return {
+    id,
+    startDate,
     title,
     description,
     dueDate,
     priority,
     notes,
     checkList,
-    changeStatus,
   };
 };
 
