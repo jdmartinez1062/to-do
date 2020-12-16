@@ -1,0 +1,1 @@
+appendToContent = (object) => {};
