@@ -38,8 +38,8 @@ const tabUpdate = (project, deleteP = false) => {
       project.title.split(" ").join().toLowerCase()
     );
     projectD.remove;
-    localStorage.removeItem(project);
+    // localStorage.removeItem("Project" + project.id);
   }
 };
 
-export default tabCreation;
+export { tabCreation, tabUpdate };
