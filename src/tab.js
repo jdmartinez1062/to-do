@@ -1,4 +1,5 @@
 import idAble from "./idAble";
+import { appendToContent } from "./DOM";
 
 const tabCreation = () => {
   const navigation = document.createElement("nav");
@@ -20,7 +21,7 @@ const tabCreation = () => {
   }
 
   navigation.appendChild(tabList);
-  return navigation
+  return navigation;
 };
 
 const tabUpdate = (project, deleteP = false) => {
@@ -31,16 +32,19 @@ const tabUpdate = (project, deleteP = false) => {
 
     pName.textContent = project.title;
     pList = document.createElement("li");
-    pName.id = idAble(pName.textContent);
+    pList.id = idAble("li " + project.id);
+    document
+      .getElementById("li " + project.id)
+      .addEventListener("click", () => {
+        appendToContent(project);
+      });
+
     pList.appendChild(pName);
     tabList.appendChild(pList);
     navigation.appendChild(pList);
   } else {
-    const projectD = document.getElementById(
-      idAble(project.title)
-    );
+    const projectD = document.getElementById(project.id);
     projectD.remove;
-    // localStorage.removeItem("Project" + project.id);
   }
 };
 

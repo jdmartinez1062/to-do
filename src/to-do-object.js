@@ -1,10 +1,10 @@
 const ToDo = (title, description, dueDate, priority, notes, checkList = []) => {
   return {
     id,
-    startDate,
     title,
     description,
     dueDate,
+    startDate,
     priority,
     notes,
     checkList,
