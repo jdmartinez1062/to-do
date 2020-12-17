@@ -2,8 +2,13 @@ import { v4 as uuidv4 } from "uuid";
 
 const form = () => {
   const main = document.getElementById("main-div");
+  const mainForm = document.createElement('div');
+  const submitB = document.createElement("input");
   const formB = document.createElement("div");
+  formB.classList.toggle('formProject');
+  mainForm.id = 'main-form';
 
+  const holdProject = document.createElement('div');
   const pTitle = document.createElement("input");
   const pTitleL = document.createElement("label");
   pTitle.setAttribute("type", "text");
@@ -18,11 +23,31 @@ const form = () => {
   pDescriptionL.textContent = "Description";
   pDescription.appendChild(pDescriptionL);
 
+  const h2Project = createElement('h2');
+  h2Project.textContent = 'Project Info';
+
+  const addToDo = document.createElement('button');
+  addToDo.addEventListener('click', toDoForm);
+
+  holdProject.append(h2Project, pTitle, pDescription);
+  formB.append(h2Project);
+  mainForm.append(formB);
+  main.append(mainForm, submitB);  
+
+  submitB.addEventListener('click', () => {
+    saveProject(formB);
+  })
+};
+
+const toDoForm = () => {
+  const mainForm = document.getElementById('main-form');
+  const formToDo = document.createElement("div");
+  const holdToDo = document.createElement('div');
+
   const pToDoTitle = document.createElement("input");
   const pToDoTitleL = document.createElement("label");
 
   pToDoTitle.setAttribute("type", "text");
-  pToDoTitle.id = "pToDoTitle";
   pToDoTitleL.textContent = "Title";
   pToDoTitle.appendChild(pToDoTitleL);
 
@@ -30,7 +55,6 @@ const form = () => {
   const pToDoDescriptionL = document.createElement("label");
 
   pToDoDescription.setAttribute("type", "text");
-  pToDoDescription.id = "pToDoDescription";
   pToDoDescriptionL.textContent = "Description";
   pToDoDescription.appendChild(pToDoDescriptionL);
 
@@ -38,7 +62,6 @@ const form = () => {
   const pToDoDueDate = document.createElement("label");
 
   pToDoDueDate.setAttribute("type", "date");
-  pToDoDueDate.id = "pToDoDueDate";
   pToDoDueDateL.textContent = "Due Date";
   pToDoDueDate.appendChild(pToDodueDateL);
 
@@ -46,7 +69,6 @@ const form = () => {
   const pToDoPriorityHL = document.createElement("label");
 
   pToDoPriorityH.setAttribute("type", "radio");
-  pToDoPriorityH.id = "pToDoPriorityH";
   pToDoPriorityHL.textContent = "High";
   pToDoPriorityH.appendChild(pToDoDescriptionHL);
 
@@ -54,7 +76,6 @@ const form = () => {
   const pToDoPriorityML = document.createElement("label");
 
   pToDoPriorityM.setAttribute("type", "radio");
-  pToDoPriorityM.id = "pToDoPriorityM";
   pToDoPriorityML.textContent = "Medium";
   pToDoPriorityM.appendChild(pToDoDescriptionML);
 
@@ -62,7 +83,6 @@ const form = () => {
   const pToDoPriorityLL = document.createElement("label");
 
   pToDoPriorityL.setAttribute("type", "radio");
-  pToDoPriorityL.id = "pToDoPriorityL";
   pToDoPriorityLL.textContent = "Low";
   pToDoPriorityL.appendChild(pToDoDescriptionLL);
 
@@ -76,8 +96,41 @@ const form = () => {
 
   const pToDoNotes = document.createElement("input");
   const pToDoNotesL = document.createElement("label");
+  pToDoNotesL.textContent = 'Notes';
 
+  pToDoNotes.append(pToDoNotesL);
+
+  holdToDo.append(pToDoTitle, pDescription, pToDoDueDate, radioHold)
+  formToDo.append(holdToDo);
+  mainForm.append(formToDo);
+
+  const addCheckTodo = document.createElement('button');
+  addCheckTodo.addEventListener('click', checkToDo);
+
+  const closeButton = document.createElement('span');
+  closeButton.classList.toggle = 'close';
+  closeButton.innerHTML = '&times;';
+  closeButton.addEventListener('click', () => {
+    deleteContent(holdToDo);
+  }
+}
+
+const checkToDo = () => {
+  const mainForm = document.getElementById('main-form');
   const pCheckTitle = document.createElement("input");
   const pCheckTitleL = document.createElement("label");
-  const submitB = document.createElement("input");
-};
+  pCheckTitle.setAttribute('type', 'text');
+  pCheckTitleL.textContent = 'Add a CheckList';
+  pCheckTitle.append(pCheckTitleL);
+  mainForm.append(pCheckTitle);
+  const closeButton = document.createElement('span');
+  closeButton.classList.toggle = 'close';
+  closeButton.innerHTML = '&times;';
+
+  closeButton.addEventListener('click', () => {
+    deleteContent(pCheckTitle);
+  }
+ 
+}
+
+  

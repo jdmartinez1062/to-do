@@ -28,4 +28,9 @@ const deletePreviousContent = (parent) => {
     parent.removeChild(parent.lastChild);
   }
 };
-export { init, appendToContent, appendToTab, deletePreviousContent };
+
+const deleteContent = (content) => {
+  document.getElementById(content.id).remove;
+};
+
+export { init, appendToContent, appendToTab, deletePreviousContent, deleteContent };
