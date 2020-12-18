@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { saveProject } from "./createObject";
+import { deleteContent } from "./DOM";
 
 const form = () => {
   const main = document.getElementById("main-div");
@@ -111,19 +112,25 @@ const toDoForm = () => {
 
   pToDoNotes.append(pToDoNotesL);
 
-  holdToDo.append(pToDoTitleL, pToDoDescriptionL, pToDoDueDateL, radioHold);
-  formToDo.append(holdToDo);
-  mainForm.append(formToDo);
-
-  const addCheckTodo = document.createElement("button");
+  const addCheckTodo = document.createElement("input");
+  addCheckTodo.type = 'submit';
+  addCheckTodo.value = 'Value'
   addCheckTodo.addEventListener("click", checkToDo);
 
   const closeButton = document.createElement("span");
+  closeButton.style.cursor = 'pointer';
   closeButton.classList.toggle = "close";
   closeButton.innerHTML = "&times;";
+  
+  holdToDo.id = namePriority;
+  holdToDo.append(pToDoTitleL, pToDoDescriptionL, pToDoDueDateL, radioHold, closeButton, addCheckTodo);
+  formToDo.append(holdToDo);
+  mainForm.append(formToDo);
   closeButton.addEventListener("click", () => {
+    console.log(holdToDo);
     deleteContent(holdToDo);
   });
+
 };
 
 const checkToDo = () => {
@@ -132,7 +139,7 @@ const checkToDo = () => {
   const pCheckTitleL = document.createElement("label");
   pCheckTitle.setAttribute("type", "text");
   pCheckTitleL.textContent = "Add a CheckList";
-  pCheckTitle.append(pCheckTitleL);
+  pCheckTitleL.append(pCheckTitle);
   mainForm.append(pCheckTitle);
   const closeButton = document.createElement("span");
   closeButton.classList.toggle = "close";
@@ -141,6 +148,8 @@ const checkToDo = () => {
   closeButton.addEventListener("click", () => {
     deleteContent(pCheckTitle);
   });
+
+
 };
 
 export default form;

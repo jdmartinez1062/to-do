@@ -38,7 +38,7 @@ const deletePreviousContent = (parent) => {
 };
 
 const deleteContent = (content) => {
-  document.getElementById(content.id).remove;
+  document.getElementById(content.id).remove();
 };
 
 export {
