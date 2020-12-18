@@ -50,6 +50,7 @@ const toDoForm = () => {
   const mainForm = document.getElementById("to-do-holder");
   const formToDo = document.createElement("div");
   const holdToDo = document.createElement("div");
+  const namePriority = uuidv4();
 
   const pToDoTitle = document.createElement("input");
   const pToDoTitleL = document.createElement("label");
@@ -76,7 +77,7 @@ const toDoForm = () => {
   const pToDoPriorityHL = document.createElement("label");
 
   pToDoPriorityH.setAttribute("type", "radio");
-  pToDoPriorityH.setAttribute("name", "priority");
+  pToDoPriorityH.setAttribute("name", `${namePriority}`);
   pToDoPriorityHL.textContent = "High";
   pToDoPriorityHL.appendChild(pToDoPriorityH);
 
@@ -84,7 +85,7 @@ const toDoForm = () => {
   const pToDoPriorityML = document.createElement("label");
 
   pToDoPriorityM.setAttribute("type", "radio");
-  pToDoPriorityM.setAttribute("name", "priority");
+  pToDoPriorityM.setAttribute("name", `${namePriority}`);
   pToDoPriorityML.textContent = "Medium";
   pToDoPriorityML.appendChild(pToDoPriorityM);
 
@@ -92,7 +93,7 @@ const toDoForm = () => {
   const pToDoPriorityLL = document.createElement("label");
 
   pToDoPriorityL.setAttribute("type", "radio");
-  pToDoPriorityL.setAttribute("name", "priority");
+  pToDoPriorityL.setAttribute("name", `${namePriority}`);
   pToDoPriorityLL.textContent = "Low";
   pToDoPriorityLL.appendChild(pToDoPriorityL);
 
