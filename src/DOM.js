@@ -1,17 +1,25 @@
 import { tabCreation, tabUpdate } from "./tab";
-
+import form from "./form";
+import showProjectF from "./showProject";
 const init = () => {
   const content = document.getElementById("content");
   const sidebar = document.createElement("div");
   const mainDiv = document.createElement("div");
+  const formButton = document.createElement("input");
+
+  formButton.id = "from-button";
+  formButton.type = "submit";
+
+  formButton.addEventListener("click", form);
 
   sidebar.setAttribute("id", "sidebar");
   mainDiv.setAttribute("id", "main-div");
   content.appendChild(sidebar);
-  content.appendChild(mainDiv);
+  content.append(formButton, mainDiv);
   sidebar.appendChild(tabCreation());
   const defaultProject = JSON.parse(localStorage.getItem("defaultProject"));
-  showProject(defaultProject);
+  console.log("show");
+  showProjectF(defaultProject);
 };
 
 const appendToContent = (object) => {
@@ -33,4 +41,10 @@ const deleteContent = (content) => {
   document.getElementById(content.id).remove;
 };
 
-export { init, appendToContent, appendToTab, deletePreviousContent, deleteContent };
+export {
+  init,
+  appendToContent,
+  appendToTab,
+  deletePreviousContent,
+  deleteContent,
+};
