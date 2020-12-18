@@ -127,7 +127,6 @@ const toDoForm = () => {
   formToDo.append(holdToDo);
   mainForm.append(formToDo);
   closeButton.addEventListener("click", () => {
-    console.log(holdToDo);
     deleteContent(holdToDo);
   });
 
@@ -137,19 +136,24 @@ const checkToDo = () => {
   const mainForm = document.getElementById("main-form");
   const pCheckTitle = document.createElement("input");
   const pCheckTitleL = document.createElement("label");
-  pCheckTitle.setAttribute("type", "text");
-  pCheckTitleL.textContent = "Add a CheckList";
-  pCheckTitleL.append(pCheckTitle);
-  mainForm.append(pCheckTitle);
+  const holdCheck = document.createElement("div");
   const closeButton = document.createElement("span");
+  const checkId = uuidv4();
+  holdCheck.id = checkId;
+  
   closeButton.classList.toggle = "close";
   closeButton.innerHTML = "&times;";
 
+  pCheckTitle.setAttribute("type", "text");
+  pCheckTitleL.textContent = "Add a CheckList";
+
+  pCheckTitleL.append(pCheckTitle);
+  holdCheck.append(pCheckTitleL, closeButton);
+  mainForm.append(holdCheck);
+
   closeButton.addEventListener("click", () => {
-    deleteContent(pCheckTitle);
+    deleteContent(holdCheck);
   });
-
-
 };
 
 export default form;
