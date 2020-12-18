@@ -1,4 +1,4 @@
-const CheckList = (title, status = false) => {
+const CheckList = (id, title, status = false) => {
   const statusToggle = () => {
     if (this.status) {
       this.status = false;
@@ -8,6 +8,7 @@ const CheckList = (title, status = false) => {
   };
 
   return {
+    id,
     title,
     status,
     statusToggle,

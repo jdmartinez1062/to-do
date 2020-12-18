@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { saveProject } from "./createObject";
+import saveProject from "./createObject";
 import { deleteContent } from "./DOM";
 
 const form = () => {
@@ -43,14 +43,13 @@ const form = () => {
   main.append(mainForm, submitB);
 
   submitB.addEventListener("click", () => {
-    saveProject(formB);
+    saveProject(mainForm);
   });
 };
 
 const toDoForm = () => {
   const mainForm = document.getElementById("to-do-holder");
   const formToDo = document.createElement("div");
-  const holdToDo = document.createElement("div");
   const namePriority = uuidv4();
 
   const pToDoTitle = document.createElement("input");
@@ -122,9 +121,7 @@ const toDoForm = () => {
   closeButton.classList.toggle = "close";
   closeButton.innerHTML = "&times;";
   
-  holdToDo.id = namePriority;
-  holdToDo.append(pToDoTitleL, pToDoDescriptionL, pToDoDueDateL, radioHold, closeButton, addCheckTodo);
-  formToDo.append(holdToDo);
+  formToDo.append(pToDoTitleL, pToDoDescriptionL, pToDoDueDateL, radioHold, closeButton, addCheckTodo)
   mainForm.append(formToDo);
   closeButton.addEventListener("click", () => {
     deleteContent(holdToDo);
