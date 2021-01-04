@@ -50,6 +50,7 @@ const form = () => {
 const toDoForm = () => {
   const mainForm = document.getElementById("to-do-holder");
   const formToDo = document.createElement("div");
+  formToDo.id = uuidv4();
   const namePriority = uuidv4();
 
   const pToDoTitle = document.createElement("input");
@@ -111,33 +112,42 @@ const toDoForm = () => {
 
   pToDoNotes.append(pToDoNotesL);
 
+  const checkToDoHolder = document.createElement("div");
   const addCheckTodo = document.createElement("input");
-  addCheckTodo.type = 'submit';
-  addCheckTodo.value = 'Value'
-  addCheckTodo.addEventListener("click", checkToDo);
-
-  const closeButton = document.createElement("span");
-  closeButton.style.cursor = 'pointer';
-  closeButton.classList.toggle = "close";
-  closeButton.innerHTML = "&times;";
-  
-  formToDo.append(pToDoTitleL, pToDoDescriptionL, pToDoDueDateL, radioHold, closeButton, addCheckTodo)
-  mainForm.append(formToDo);
-  closeButton.addEventListener("click", () => {
-    deleteContent(holdToDo);
+  addCheckTodo.type = "submit";
+  addCheckTodo.value = "Add check To Do";
+  addCheckTodo.addEventListener("click", () => {
+    checkToDo(checkToDoHolder);
   });
 
+  const closeButton = document.createElement("span");
+  closeButton.style.cursor = "pointer";
+  closeButton.classList.toggle = "close";
+  closeButton.innerHTML = "&times;";
+
+  formToDo.append(
+    pToDoTitleL,
+    pToDoDescriptionL,
+    pToDoDueDateL,
+    radioHold,
+    closeButton,
+    addCheckTodo,
+    checkToDoHolder
+  );
+  mainForm.append(formToDo);
+  closeButton.addEventListener("click", () => {
+    deleteContent(formToDo);
+  });
 };
 
-const checkToDo = () => {
-  const mainForm = document.getElementById("main-form");
+const checkToDo = (holder) => {
   const pCheckTitle = document.createElement("input");
   const pCheckTitleL = document.createElement("label");
   const holdCheck = document.createElement("div");
   const closeButton = document.createElement("span");
   const checkId = uuidv4();
   holdCheck.id = checkId;
-  
+
   closeButton.classList.toggle = "close";
   closeButton.innerHTML = "&times;";
 
@@ -146,8 +156,7 @@ const checkToDo = () => {
 
   pCheckTitleL.append(pCheckTitle);
   holdCheck.append(pCheckTitleL, closeButton);
-  mainForm.append(holdCheck);
-
+  holder.append(holdCheck);
   closeButton.addEventListener("click", () => {
     deleteContent(holdCheck);
   });
