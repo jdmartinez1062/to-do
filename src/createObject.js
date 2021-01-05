@@ -2,8 +2,8 @@ import CheckList from "./checkListObject";
 import { v4 as uuidv4 } from "uuid";
 import ToDo from "./to-do-object";
 import Project from "./project";
-
-const saveProject = (html) => {
+import { appendToContent, appendToTab } from "./DOM";
+const saveProject = () => {
   const projectTitle = document.getElementById("pTitle").value;
   const projectDescription = document.getElementById("pDescription").value;
   const holderToDo = document.getElementById("to-do-holder");
@@ -30,7 +30,7 @@ const saveProject = (html) => {
             }
           }
           if (!priorityBoolean) {
-            array.push('medium');
+            array.push("medium");
           }
           priorityBoolean = false;
         } else {
@@ -46,9 +46,18 @@ const saveProject = (html) => {
     arrayToDo.push(ToDo(uuidv4(), ...array, arrayCheck));
     array = [];
     arrayCheck = [];
-    console.log(arrayToDo);
-    Project(uuidv4(), projectTitle, projectDescription, arrayToDo);
   }
+
+  const projects = JSON.parse(localStorage.getItem("Projects"));
+  const pholder = Project(
+    uuidv4(),
+    projectTitle,
+    projectDescription,
+    arrayToDo
+  );
+  const p = projects.push(pholder);
+  appendToTab(pholder);
+  localStorage.setItem("Projects", JSON.stringify(p));
 };
 
 export default saveProject;

@@ -43,7 +43,7 @@ const form = () => {
   main.append(mainForm, submitB);
 
   submitB.addEventListener("click", () => {
-    saveProject(mainForm);
+    saveProject();
   });
 };
 
@@ -110,7 +110,7 @@ const toDoForm = () => {
   radioHold.append(radioText, hold);
 
   const pToDoNotes = document.createElement("input");
-  pToDoNotes.type = 'text-field';
+  pToDoNotes.type = "text-field";
   const pToDoNotesL = document.createElement("label");
   pToDoNotesL.textContent = "Notes";
 

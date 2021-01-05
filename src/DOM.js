@@ -7,6 +7,9 @@ const init = () => {
   const mainDiv = document.createElement("div");
   const formButton = document.createElement("input");
 
+  if (!localStorage.getItem("Projects")) {
+    localStorage.setItem("Projects", "[]");
+  }
   formButton.id = "from-button";
   formButton.type = "submit";
 
@@ -18,17 +21,18 @@ const init = () => {
   content.append(formButton, mainDiv);
   sidebar.appendChild(tabCreation());
   const defaultProject = JSON.parse(localStorage.getItem("defaultProject"));
-  console.log("show");
   showProjectF(defaultProject);
 };
 
 const appendToContent = (object) => {
   deletePreviousContent(document.getElementById("main-div"));
-  showProject(JSON.parse(localStorage.getItem(`${object.id}`)));
+  showProjectF(
+    findProject(JSON.parse(localStorage.getItem("Projects"), object))
+  );
 };
 
 const appendToTab = (object) => {
-  tabUpdate(JSON.parse(localStorage.getItem(`${object.id}`)));
+  tabUpdate(object);
 };
 
 const deletePreviousContent = (parent) => {

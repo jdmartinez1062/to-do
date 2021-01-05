@@ -3,9 +3,14 @@ import { appendToContent } from "./DOM";
 
 const tabCreation = () => {
   const navigation = document.createElement("nav");
+  navigation.id = "project-navigation";
   const tabList = document.createElement("ul");
+  tabList.id = "project-nav-list";
   const index = document.createElement("a");
   const defaultProject = document.createElement("a");
+  defaultProject.textContent = JSON.parse(
+    localStorage.getItem("defaultProject")
+  ).title;
 
   index.textContent = "Project index";
   defaultProject.textContent = "Default";
@@ -20,28 +25,30 @@ const tabCreation = () => {
     tabList.append(list);
   }
 
+  info[0].addEventListener(click, projectIndex);
+
   navigation.appendChild(tabList);
   return navigation;
 };
 
 const tabUpdate = (project, deleteP = false) => {
   if (!deleteP) {
-    const navigation = document.getElementsByTagName("nav");
-    const tabList = document.getElementsByTagName("ul");
+    const navigation = document.getElementById("project-navigation");
+    const tabList = document.getElementById("project-nav-list");
     const pName = document.createElement("a");
 
     pName.textContent = project.title;
-    pList = document.createElement("li");
+    const pList = document.createElement("li");
     pList.id = idAble("li " + project.id);
-    document
-      .getElementById("li " + project.id)
-      .addEventListener("click", () => {
-        appendToContent(project);
-      });
 
+    pList.addEventListener("click", () => {
+      appendToContent(project);
+    });
+    console.log(pList);
+    console.log(tabList);
     pList.appendChild(pName);
     tabList.appendChild(pList);
-    navigation.appendChild(pList);
+    navigation.appendChild(tabList);
   } else {
     const projectD = document.getElementById(project.id);
     projectD.remove;

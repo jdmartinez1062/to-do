@@ -35,4 +35,11 @@ const showProjectF = (element) => {
   mainDiv.append(...array);
 };
 
-export default showProjectF;
+const findProject = (array, project) => {
+  for (let i = 0; i < array.lenght; i += 1) {
+    if (array[i].id == project) {
+      return array[i];
+    }
+  }
+};
+export { showProjectF, findProject };
