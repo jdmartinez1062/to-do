@@ -20,27 +20,30 @@ const saveProject = (html) => {
         array.push(element.children[0].value);
       } else if (element.tagName == "DIV") {
         if (element.classList.contains("radio-holder")) {
-          let radio = element.children[1];
-
+          let radio = element.children[1].children;
+          console.log(radio);
+          console.log(radio.length);
           for (let u = 0; u < radio.length; u += 1) {
-            const radioInput = radio.children[u].children[0];
+            const radioInput = radio[u].children[0];
+            console.log(radioInput);
             if (radioInput.checked) {
               array.push(radioInput.value);
+              
             }
+            console.log(radioInput.value);
+            console.log(radioInput.checked);
           }
         } else {
-          const checkDiv = element.children[0].children;
+          const checkDiv = element.children;
           for (let k = 0; k < checkDiv.length; k += 1) {
-            const checkElement = checkDiv[k];
-            console.log(checkElement);
-            if (checkElement.tagName == "LABEL") {
-              arrayChecklist = checkElement.children[0].value;
-              console.log(arrayChecklist);
-              arrayCheck.push(CheckList(uuidv4(), arrayChecklist));
-              console.log(arrayCheck);
-            }
+ 
+            const checkElement = checkDiv[k].children[0];
+ 
+            arrayChecklist = checkElement.children[0].value;
+
+            arrayCheck.push(CheckList(uuidv4(), arrayChecklist));
+   
           }
-          arrayChecklist = [];
         }
       }
     }

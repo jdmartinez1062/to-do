@@ -78,6 +78,7 @@ const toDoForm = () => {
   const pToDoPriorityHL = document.createElement("label");
 
   pToDoPriorityH.setAttribute("type", "radio");
+  pToDoPriorityH.setAttribute("value", "high");
   pToDoPriorityH.setAttribute("name", `${namePriority}`);
   pToDoPriorityHL.textContent = "High";
   pToDoPriorityHL.appendChild(pToDoPriorityH);
@@ -86,6 +87,7 @@ const toDoForm = () => {
   const pToDoPriorityML = document.createElement("label");
 
   pToDoPriorityM.setAttribute("type", "radio");
+  pToDoPriorityM.setAttribute("value", "medium");
   pToDoPriorityM.setAttribute("name", `${namePriority}`);
   pToDoPriorityML.textContent = "Medium";
   pToDoPriorityML.appendChild(pToDoPriorityM);
@@ -94,6 +96,7 @@ const toDoForm = () => {
   const pToDoPriorityLL = document.createElement("label");
 
   pToDoPriorityL.setAttribute("type", "radio");
+  pToDoPriorityL.setAttribute("value", "low");
   pToDoPriorityL.setAttribute("name", `${namePriority}`);
   pToDoPriorityLL.textContent = "Low";
   pToDoPriorityLL.appendChild(pToDoPriorityL);
