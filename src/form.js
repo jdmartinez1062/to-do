@@ -99,10 +99,10 @@ const toDoForm = () => {
   pToDoPriorityLL.appendChild(pToDoPriorityL);
 
   const radioHold = document.createElement("div");
+  radioHold.classList.toggle("radio-holder");
   const radioText = document.createElement("p");
   radioText.textContent = "Pick your ToDo level of priority";
   const hold = document.createElement("div");
-  hold.classList.toggle("radio-holder");
   hold.append(pToDoPriorityHL, pToDoPriorityML, pToDoPriorityLL);
   radioHold.append(radioText, hold);
 

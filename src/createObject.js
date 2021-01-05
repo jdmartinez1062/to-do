@@ -19,16 +19,36 @@ const saveProject = (html) => {
       if (element.tagName == "LABEL") {
         array.push(element.children[0].value);
       } else if (element.tagName == "DIV") {
-        const checkDiv = element.children[0].children;
-        for (let k = 0; k < checkDiv.length; k += 1) {
-          arrayChecklist = checkDiv[k].value;
-          arrayCheck.push(CheckList(uuidv4(), arrayChecklist));
-          arrayCheck = [];
+        if (element.classList.contains("radio-holder")) {
+          let radio = element.children[1];
+
+          for (let u = 0; u < radio.length; u += 1) {
+            const radioInput = radio.children[u].children[0];
+            if (radioInput.checked) {
+              array.push(radioInput.value);
+            }
+          }
+        } else {
+          const checkDiv = element.children[0].children;
+          for (let k = 0; k < checkDiv.length; k += 1) {
+            const checkElement = checkDiv[k];
+            console.log(checkElement);
+            if (checkElement.tagName == "LABEL") {
+              arrayChecklist = checkElement.children[0].value;
+              console.log(arrayChecklist);
+              arrayCheck.push(CheckList(uuidv4(), arrayChecklist));
+              console.log(arrayCheck);
+            }
+          }
+          arrayChecklist = [];
         }
       }
     }
+    console.log(array);
+    console.log(arrayCheck);
     arrayToDo.push(ToDo(uuidv4(), ...array, arrayCheck));
     array = [];
+    arrayCheck = [];
     console.log(arrayToDo);
     Project(uuidv4(), projectTitle, projectDescription, arrayToDo);
   }
