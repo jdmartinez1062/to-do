@@ -46,23 +46,9 @@ const saveProject = (html) => {
     arrayToDo.push(ToDo(uuidv4(), ...array, arrayCheck));
     array = [];
     arrayCheck = [];
+    console.log(arrayToDo);
     Project(uuidv4(), projectTitle, projectDescription, arrayToDo);
   }
 };
 
 export default saveProject;
-
-// prject
-// id,
-// title, *
-// description, *
-// toDo,
-
-// todo
-// id,
-// title,
-// description,
-// dueDate,
-// priority,
-// notes,
-// checkList = []
