@@ -55,9 +55,9 @@ const saveProject = () => {
     projectDescription,
     arrayToDo
   );
-  const p = projects.push(pholder);
+  projects.push(pholder);
   appendToTab(pholder);
-  localStorage.setItem("Projects", JSON.stringify(p));
+  localStorage.setItem("Projects", JSON.stringify(projects));
 };
 
 export default saveProject;

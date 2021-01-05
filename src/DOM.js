@@ -1,6 +1,6 @@
 import { tabCreation, tabUpdate } from "./tab";
 import form from "./form";
-import showProjectF from "./showProject";
+import { showProject } from "./showProject";
 const init = () => {
   const content = document.getElementById("content");
   const sidebar = document.createElement("div");
@@ -21,14 +21,12 @@ const init = () => {
   content.append(formButton, mainDiv);
   sidebar.appendChild(tabCreation());
   const defaultProject = JSON.parse(localStorage.getItem("defaultProject"));
-  showProjectF(defaultProject);
+  showProject(defaultProject);
 };
 
 const appendToContent = (object) => {
   deletePreviousContent(document.getElementById("main-div"));
-  showProjectF(
-    findProject(JSON.parse(localStorage.getItem("Projects"), object))
-  );
+  showProject(object);
 };
 
 const appendToTab = (object) => {

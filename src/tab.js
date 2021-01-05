@@ -1,5 +1,6 @@
 import idAble from "./idAble";
 import { appendToContent } from "./DOM";
+import projectIndex from "./index";
 
 const tabCreation = () => {
   const navigation = document.createElement("nav");
@@ -13,7 +14,6 @@ const tabCreation = () => {
   ).title;
 
   index.textContent = "Project index";
-  defaultProject.textContent = "Default";
 
   const info = [index, defaultProject];
   let list;
@@ -25,7 +25,7 @@ const tabCreation = () => {
     tabList.append(list);
   }
 
-  info[0].addEventListener(click, projectIndex);
+  info[0].addEventListener("click", projectIndex);
 
   navigation.appendChild(tabList);
   return navigation;

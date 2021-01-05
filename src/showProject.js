@@ -1,6 +1,6 @@
 import idAble from "./idAble";
 
-const showProjectF = (element) => {
+const showProject = (element) => {
   const mainDiv = document.getElementById("main-div");
   const titleP = document.createElement("h2");
   const descriptionP = document.createElement("p");
@@ -42,4 +42,4 @@ const findProject = (array, project) => {
     }
   }
 };
-export { showProjectF, findProject };
+export { showProject, findProject };
