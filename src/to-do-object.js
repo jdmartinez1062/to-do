@@ -6,7 +6,7 @@ const ToDo = (
   description,
   dueDate,
   priority,
-  notes,
+  notes = "",
   checkList = []
 ) => {
   return {

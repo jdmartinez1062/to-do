@@ -110,10 +110,11 @@ const toDoForm = () => {
   radioHold.append(radioText, hold);
 
   const pToDoNotes = document.createElement("input");
+  pToDoNotes.type = 'text-field';
   const pToDoNotesL = document.createElement("label");
   pToDoNotesL.textContent = "Notes";
 
-  pToDoNotes.append(pToDoNotesL);
+  pToDoNotesL.append(pToDoNotes);
 
   const checkToDoHolder = document.createElement("div");
   const addCheckTodo = document.createElement("input");
@@ -133,6 +134,7 @@ const toDoForm = () => {
     pToDoDescriptionL,
     pToDoDueDateL,
     radioHold,
+    pToDoNotesL,
     closeButton,
     addCheckTodo,
     checkToDoHolder

@@ -28,7 +28,6 @@ const saveProject = (html) => {
             console.log(radioInput);
             if (radioInput.checked) {
               array.push(radioInput.value);
-              
             }
             console.log(radioInput.value);
             console.log(radioInput.checked);
@@ -36,23 +35,19 @@ const saveProject = (html) => {
         } else {
           const checkDiv = element.children;
           for (let k = 0; k < checkDiv.length; k += 1) {
- 
             const checkElement = checkDiv[k].children[0];
- 
             arrayChecklist = checkElement.children[0].value;
-
             arrayCheck.push(CheckList(uuidv4(), arrayChecklist));
-   
           }
         }
       }
     }
-    console.log(array);
-    console.log(arrayCheck);
+    if (array.length == 4) {
+      array.push('');
+    } 
     arrayToDo.push(ToDo(uuidv4(), ...array, arrayCheck));
     array = [];
     arrayCheck = [];
-    console.log(arrayToDo);
     Project(uuidv4(), projectTitle, projectDescription, arrayToDo);
   }
 };
