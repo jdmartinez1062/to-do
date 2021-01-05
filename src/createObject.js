@@ -11,6 +11,7 @@ const saveProject = (html) => {
   let arrayChecklist = [];
   let arrayCheck = [];
   let arrayToDo = [];
+  let priorityBoolean = false;
 
   for (let i = 0; i < holderToDo.children.length; i += 1) {
     const toDoDiv = holderToDo.children[i].children;
@@ -21,17 +22,17 @@ const saveProject = (html) => {
       } else if (element.tagName == "DIV") {
         if (element.classList.contains("radio-holder")) {
           let radio = element.children[1].children;
-          console.log(radio);
-          console.log(radio.length);
           for (let u = 0; u < radio.length; u += 1) {
             const radioInput = radio[u].children[0];
-            console.log(radioInput);
             if (radioInput.checked) {
               array.push(radioInput.value);
+              priorityBoolean = true;
             }
-            console.log(radioInput.value);
-            console.log(radioInput.checked);
           }
+          if (!priorityBoolean) {
+            array.push('medium');
+          }
+          priorityBoolean = false;
         } else {
           const checkDiv = element.children;
           for (let k = 0; k < checkDiv.length; k += 1) {
@@ -42,9 +43,6 @@ const saveProject = (html) => {
         }
       }
     }
-    if (array.length == 4) {
-      array.push('');
-    } 
     arrayToDo.push(ToDo(uuidv4(), ...array, arrayCheck));
     array = [];
     arrayCheck = [];
