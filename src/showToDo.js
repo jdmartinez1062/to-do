@@ -3,17 +3,20 @@ import showCheckList from "./showCheckList";
 
 const showToDo = (toDo) => {
   const array = [];
-  let stub;
-  p.textContent = toDo.description;
-  toDo.forEach(element, (value) => {
+ 
+  Object.entries(toDo).forEach((whatever) => {
+    const value = whatever[1];
+    const element = whatever[0];
+
     if (toDo.hasOwnProperty(element)) {
-      if (element == "checklist") {
+      if (element == "checkList") {
+        const stub = document.createElement('div');
         stub.append(...showCheckList(toDo, value));
         array.push(stub);
       } else if (element != "title") {
-        stub = document.createElement("p");
+        const stub = document.createElement("p");
         stub.className += ` ${idAble(element)}`;
-        stub.textContent(value);
+        stub.textContent = value;
         array.push(stub);
       }
     }

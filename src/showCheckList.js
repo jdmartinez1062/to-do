@@ -1,20 +1,23 @@
 import idAble from "./idAble";
 
-const showCheckList = (toDo, value) => {
+const showCheckList = (toDo, checklist) => {
   let stub;
   const array = [];
   let input;
   let label;
-  value.forEach(key, content => {
+
+  Object.entries(checklist).forEach((whatever) => {
+    const value = whatever[1];
+
     stub = document.createElement('div');
     input = document.createElement('input');
     label = document.createElement('label');
     input.setAttribute('type', 'checkbox');
-    input.setAttribute('id', idAble(toDo.id + ' check ' + value.id));
-    label.textContent(content.title);
-    input.appendChild(label);
-    stub.appendChild(input);
-    input.addEventListener('click', content.toggleStatus())
+    input.setAttribute('id', idAble(toDo.id + ' check ' + checklist.id));
+    label.textContent = value.title;
+    label.append(input);
+    stub.append(label);
+    // input.addEventListener('click', value.toggleStatus())
     array.push(stub);
   });
   return array;
