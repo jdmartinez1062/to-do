@@ -9,6 +9,7 @@ const init = () => {
 
   formButton.id = "from-button";
   formButton.type = "submit";
+  formButton.classList.add('button', 'is-primary');
 
   formButton.addEventListener("click", form);
 
