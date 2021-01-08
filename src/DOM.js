@@ -7,9 +7,6 @@ const init = () => {
   const mainDiv = document.createElement("div");
   const formButton = document.createElement("input");
 
-  if (!localStorage.getItem("Projects")) {
-    localStorage.setItem("Projects", "[]");
-  }
   formButton.id = "from-button";
   formButton.type = "submit";
 
@@ -20,7 +17,8 @@ const init = () => {
   content.appendChild(sidebar);
   content.append(formButton, mainDiv);
   sidebar.appendChild(tabCreation());
-  const defaultProject = JSON.parse(localStorage.getItem("defaultProject"));
+  console.log(localStorage.getItem("Projects"));
+  const defaultProject = JSON.parse(localStorage.getItem("Projects"));
   showProject(defaultProject);
 };
 

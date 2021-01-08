@@ -17,7 +17,10 @@ window.onload = () => {
         "21-12-2020",
         "high",
         "First ToDo Note",
-        [CheckList()]
+        [
+          CheckList(uuidv4(), "first checklist", false),
+          CheckList(uuidv4(), "second checklist", true),
+        ]
       ),
       ToDo(
         uuidv4(),
@@ -30,9 +33,14 @@ window.onload = () => {
       ),
     ]
   );
+  console.log(localStorage.getItem("Projects"));
+  console.log(localStorage.getItem("asdasd"));
+  const projects = JSON.parse(localStorage.getItem("Projects")) || [];
+  console.log(projects);
+  console.log(CheckList(uuidv4(), "first checklist", false));
+  defaultProject = projects ? (projects[0] = defaultProject) : [defaultProject];
 
-  defaultProject = [defaultProject];
-  localStorage.setItem("Projects", JSON.stringify(defaultProject));
+  localStorage.setItem("Projects", JSON.stringify(projects));
   init();
   // load the default page
   // put the tabs

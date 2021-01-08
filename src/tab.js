@@ -1,31 +1,35 @@
 import idAble from "./idAble";
 import { appendToContent } from "./DOM";
 import projectIndex from "./index";
+import { findProject } from "./localStorageUpdate";
 
 const tabCreation = () => {
   const navigation = document.createElement("nav");
   navigation.id = "project-navigation";
   const tabList = document.createElement("ul");
   tabList.id = "project-nav-list";
+  const projects = JSON.parse(localStorage.getItem("Projects"));
+
+  let list = [];
+  const liIndex = document.createElement("li");
   const index = document.createElement("a");
-  const defaultProject = document.createElement("a");
-  defaultProject.textContent = JSON.parse(
-    localStorage.getItem("defaultProject")
-  ).title;
-
-  index.textContent = "Project index";
-
-  const info = [index, defaultProject];
-  let list;
-
-  for (let i = 0; i < info.length; i += 1) {
+  index.id = "index";
+  index.textContent = "Project Index";
+  index.addEventListener("click", projectIndex);
+  liIndex.append(index);
+  tabList.append(liIndex);
+  for (let i = 0; i < projects.length; i += 1) {
+    const link = document.createElement("a");
     list = document.createElement("li");
-    info[i].id = idAble(info[i].textContent);
-    list.appendChild(info[i]);
+
+    link.id = projects[i].id;
+    link.textContent = projects[i].title;
+    link.addEventListener("click", () => {
+      appendToContent(findProject(projects[i]));
+    });
+    list.appendChild(link);
     tabList.append(list);
   }
-
-  info[0].addEventListener("click", projectIndex);
 
   navigation.appendChild(tabList);
   return navigation;
@@ -42,7 +46,7 @@ const tabUpdate = (project, deleteP = false) => {
     pList.id = idAble("li " + project.id);
 
     pList.addEventListener("click", () => {
-      appendToContent(project);
+      appendToContent(findProject(project));
     });
     console.log(pList);
     console.log(tabList);

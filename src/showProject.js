@@ -1,11 +1,12 @@
 import idAble from "./idAble";
 import showToDo from "./showToDo";
-
 const showProject = (element) => {
   const mainDiv = document.getElementById("main-div");
   const titleP = document.createElement("h2");
   const descriptionP = document.createElement("p");
   let array = [];
+
+  localStorage.setItem("actual-project", JSON.stringify(element));
 
   titleP.textContent = element.title;
   descriptionP.textContent = element.description;
@@ -33,6 +34,7 @@ const showProject = (element) => {
     mainDiv.appendChild(elementDiv);
     mainDiv.appendChild(description);
   });
+  console.log(array);
 };
 
 const findProject = (array, project) => {

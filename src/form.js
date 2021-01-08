@@ -44,6 +44,7 @@ const form = () => {
 
   submitB.addEventListener("click", () => {
     saveProject();
+    deleteContent(mainForm);
   });
 };
 
