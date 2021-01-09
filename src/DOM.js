@@ -7,9 +7,10 @@ const init = () => {
   const mainDiv = document.createElement("div");
   const formButton = document.createElement("input");
 
-  formButton.id = "from-button";
+  formButton.id = "form-button";
   formButton.type = "submit";
-  formButton.classList.add('button', 'is-primary');
+  formButton.value = 'New Project'
+  formButton.classList.add('button', 'is-primary', 'column');
 
   formButton.addEventListener("click", form);
 
