@@ -8,7 +8,7 @@ const tabCreation = () => {
   navigation.id = "project-navigation";
   const tabList = document.createElement("ul");
   tabList.id = "project-nav-list";
-  tabList.classList.add('column', 'p-6');
+  tabList.classList.add('column');
   const projects = JSON.parse(localStorage.getItem("Projects"));
 
   let list = [];

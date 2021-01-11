@@ -15,10 +15,11 @@ const init = () => {
   formButton.id = "form-button";
   formButton.type = "submit";
   formButton.value = 'New Project'
-  formButton.classList.add('button', 'is-primary', 'is-fullwidth');
+  formButton.classList.add('button', 'is-primary','is-fullwidth');
   formButton.addEventListener("click", form);
  
   sidebar.setAttribute("id", "sidebar");
+  sidebar.classList.add('column', 'is-2')
   mainDiv.setAttribute("id", "main-div");
   content.append(sidebar);
   content.append(mainDiv);
