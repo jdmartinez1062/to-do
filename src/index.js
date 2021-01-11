@@ -33,18 +33,10 @@ window.onload = () => {
       ),
     ]
   );
-  console.log(localStorage.getItem("Projects"));
-  console.log(localStorage.getItem("asdasd"));
   const projects = JSON.parse(localStorage.getItem("Projects")) || [];
-  console.log(projects);
-  console.log(CheckList(uuidv4(), "first checklist", false));
   defaultProject = projects ? (projects[0] = defaultProject) : [defaultProject];
-
   localStorage.setItem("Projects", JSON.stringify(projects));
   init();
-  // load the default page
-  // put the tabs
-  // add binding events
 };
 
 const projectIndex = () => {
@@ -52,12 +44,10 @@ const projectIndex = () => {
   indexHolder.id = "index-holder";
   const projects = JSON.parse(localStorage.getItem("Projects"));
   const main = document.getElementById("main-div");
-  console.log(projects.length);
   for (let i = 0; i < projects.length; i += 1) {
     const projectTitle = document.createElement("a");
     projectTitle.id = projects[i].id;
     projectTitle.textContent = projects[i].title;
-    console.log(projects[i].title);
     projectTitle.addEventListener("click", () => {
       deletePreviousContent(main);
       showProject(projects[i]);
@@ -66,7 +56,6 @@ const projectIndex = () => {
   }
 
   deletePreviousContent(main);
-  console.log(indexHolder.children);
   main.append(indexHolder);
 };
 export default projectIndex;
