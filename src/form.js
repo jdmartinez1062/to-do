@@ -64,6 +64,8 @@ const toDoForm = () => {
   mainForm.style.backgroundColor = 'skyblue';
   const formToDo = document.createElement("div");
   formToDo.id = uuidv4();
+  formToDo.classList.add('box');
+  formToDo.style.position = 'relative';
   const namePriority = uuidv4();
 
   const pToDoTitle = document.createElement("input");
@@ -86,7 +88,7 @@ const toDoForm = () => {
   pToDoDescriptionL.appendChild(pToDoDescription);
 
   const pToDoDueDate = document.createElement("input");
-  pToDoDueDate.classList.add('mx-2', 'is-small', 'is-info');
+  pToDoDueDate.classList.add('mx-2', 'is-small');
   const pToDoDueDateL = document.createElement("label");
   pToDoDueDateL.classList.add('is-small', 'is-info', 'label');
 
@@ -138,7 +140,7 @@ const toDoForm = () => {
   radioHold.append(radioText, hold);
 
   const pToDoNotes = document.createElement("textarea");
-  pToDoNotes.classList.add('textarea', 'is-small');
+  pToDoNotes.classList.add('textarea', 'is-small', 'is-info');
   pToDoNotes.row = '5';
   const pToDoNotesL = document.createElement("label");
   pToDoNotesL.textContent = "Notes";
