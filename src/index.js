@@ -8,7 +8,7 @@ window.onload = () => {
   let defaultProject = Project(
     uuidv4(),
     "default",
-    "All project are show here",
+    "All project are shown here",
     [
       ToDo(
         uuidv4(),
