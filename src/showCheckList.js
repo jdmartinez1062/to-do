@@ -32,10 +32,14 @@ const showCheckList = (toDo, checklist) => {
           for (let j = 0; j < actualToDo.checkList.length; j += 1) {
             if (actualToDo.checkList[j].id == e.id) {
               let actualCheckList = actualToDo.checkList[j];
-
+              console.log("before change");
+              console.log(actualCheckList);
               actualCheckList = actualToDo.checkList[j];
-
+              console.log(actualCheckList.status ? false : true);
+              console.log("After change");
               actualCheckList.status = actualCheckList.status ? false : true;
+              console.log(actualCheckList);
+              console.log(e);
               updateLocalStorage(project);
             }
           }

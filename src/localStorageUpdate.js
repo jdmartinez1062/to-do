@@ -7,12 +7,20 @@ const updateLocalStorage = (element) => {
   }
   localStorage.setItem("Projects", JSON.stringify(projects));
 };
-const findProject = (project) => {
+const findProject = (project, index = false) => {
   const local = JSON.parse(localStorage.getItem("Projects"));
   for (let i = 0; i < local.length; i += 1) {
     if (local[i].id == project.id) {
-      return local[i];
+      if (!index) {
+        return local[i];
+      } else {
+        return i;
+      }
     }
   }
 };
-export { updateLocalStorage, findProject };
+const deleteProject = (project) => {
+  const actualP = findProject(project, true);
+  localStorag;
+};
+export { updateLocalStorage, findProject, deleteProject };
