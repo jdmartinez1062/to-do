@@ -20,6 +20,7 @@ const form = () => {
   const holdProject = document.createElement("div");
   const pTitle = document.createElement("input");
   pTitle.classList.add('input');
+  pTitle.placeholder = 'Add a title for your new project.';
   const pTitleL = document.createElement("label");
   pTitleL.classList.add('label');
   pTitle.setAttribute("type", "text");
@@ -69,6 +70,7 @@ const toDoForm = () => {
   const namePriority = uuidv4();
 
   const pToDoTitle = document.createElement("input");
+  pToDoTitle.placeholder = 'Add a title for something you need ToDo in this project.'
   pToDoTitle.classList.add('input', 'is-small', 'is-info');
   const pToDoTitleL = document.createElement("label");
   pToDoTitleL.classList.add('label', 'is-small');
@@ -78,6 +80,7 @@ const toDoForm = () => {
   pToDoTitleL.appendChild(pToDoTitle);
 
   const pToDoDescription = document.createElement("textarea");
+  pToDoDescription.placeholder = 'Add the description of this ToDo.'
   pToDoDescription.classList.add('textarea', 'is-small', 'is-info');
   pToDoDescription.rows = "5";
   const pToDoDescriptionL = document.createElement("label");
@@ -140,6 +143,7 @@ const toDoForm = () => {
   radioHold.append(radioText, hold);
 
   const pToDoNotes = document.createElement("textarea");
+  pToDoNotes.placeholder = 'Here you can add some notes for the ToDo.'
   pToDoNotes.classList.add('textarea', 'is-small', 'is-info');
   pToDoNotes.row = '5';
   const pToDoNotesL = document.createElement("label");
@@ -152,7 +156,7 @@ const toDoForm = () => {
   const addCheckTodo = document.createElement("input");
   addCheckTodo.classList.add('is-link', 'button')
   addCheckTodo.type = "submit";
-  addCheckTodo.value = "Add Check ToDo";
+  addCheckTodo.value = "Add Check-ToDo (List of things you need to accomplish to finish the ToDo).";
   addCheckTodo.addEventListener("click", () => {
     checkToDo(checkToDoHolder);
   });
@@ -184,6 +188,7 @@ const toDoForm = () => {
 
 const checkToDo = (holder) => {
   const pCheckTitle = document.createElement("input");
+  pCheckTitle.placeholder = 'Title for the Check-ToDo.'
   pCheckTitle.classList.add('input', 'is-small', 'is-primary');
   const pCheckTitleL = document.createElement("label");
   pCheckTitleL.classList.add('label', 'is-small', 'is-primary', 'my-4');
