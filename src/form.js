@@ -86,7 +86,7 @@ const toDoForm = () => {
   pToDoDescriptionL.appendChild(pToDoDescription);
 
   const pToDoDueDate = document.createElement("input");
-  pToDoDueDate.classList.add('input', 'is-small', 'is-info');
+  pToDoDueDate.classList.add('mx-2', 'is-small', 'is-info');
   const pToDoDueDateL = document.createElement("label");
   pToDoDueDateL.classList.add('is-small', 'is-info', 'label');
 
