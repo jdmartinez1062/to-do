@@ -25,7 +25,7 @@ window.onload = () => {
       ToDo(
         uuidv4(),
         "Second Todo",
-        "First Todo Description",
+        "Second Todo Description",
         "21-12-2020",
         "high",
         "First ToDo Note",
@@ -33,11 +33,8 @@ window.onload = () => {
       ),
     ]
   );
-  console.log(localStorage.getItem("Projects"));
-  console.log(localStorage.getItem("asdasd"));
+
   const projects = JSON.parse(localStorage.getItem("Projects")) || [];
-  console.log(projects);
-  console.log(CheckList(uuidv4(), "first checklist", false));
   defaultProject = projects ? (projects[0] = defaultProject) : [defaultProject];
 
   localStorage.setItem("Projects", JSON.stringify(projects));

@@ -24,7 +24,6 @@ const showCheckList = (toDo, checklist) => {
     label.textContent = value.title;
     label.append(input);
     stub.append(label);
-    console.log(value);
     input.addEventListener("click", (e) => {
       e = e.target;
       for (let i = 0; i < project.toDo.length; i += 1) {
@@ -33,17 +32,11 @@ const showCheckList = (toDo, checklist) => {
           for (let j = 0; j < actualToDo.checkList.length; j += 1) {
             if (actualToDo.checkList[j].id == e.id) {
               let actualCheckList = actualToDo.checkList[j];
-              console.log(actualToDo.checkList[j]);
 
               actualCheckList = actualToDo.checkList[j];
-              console.log("before");
-              console.log(actualCheckList);
 
               actualCheckList.status = actualCheckList.status ? false : true;
-              console.log("after");
-              console.log(actualCheckList);
               updateLocalStorage(project);
-              console.log(JSON.parse(localStorage.getItem("Projects")[1]));
             }
           }
         }

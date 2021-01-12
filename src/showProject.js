@@ -1,4 +1,3 @@
-import idAble from "./idAble";
 import showToDo from "./showToDo";
 const showProject = (element) => {
   const mainDiv = document.getElementById("main-div");
@@ -11,30 +10,40 @@ const showProject = (element) => {
   titleP.textContent = element.title;
   descriptionP.textContent = element.description;
 
+  const expand = document.createElement("div");
+  expand.classList.add("do-detail");
+
   mainDiv.append(titleP, descriptionP);
+
   element.toDo.forEach((element) => {
     const elementDiv = document.createElement("div");
 
-    elementDiv.setAttribute(
-      "id",
-      idAble(`${element.title} + ' ' + ${element.id}`)
-    );
+    elementDiv.setAttribute("id", element.id);
+
     let description = document.createElement("p");
     let title = document.createElement("p");
 
     title.textContent = element.title;
     description.textContent = element.description;
     elementDiv.appendChild(title);
+    elementDiv.appendChild(description);
 
     elementDiv.addEventListener("click", () => {
       array = showToDo(element);
-      mainDiv.append(...array);
+      if (elementDiv.children.length < 3) {
+        expand.append(...array);
+        elementDiv.append(expand);
+      } else {
+        for (let i = 0; i < elementDiv.children.length; i += 1) {
+          if (i >= 2) {
+            elementDiv.removeChild(elementDiv.childNodes[i]);
+          }
+        }
+      }
     });
 
     mainDiv.appendChild(elementDiv);
-    mainDiv.appendChild(description);
   });
-  console.log(array);
 };
 
 const findProject = (array, project) => {

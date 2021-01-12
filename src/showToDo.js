@@ -13,7 +13,11 @@ const showToDo = (toDo) => {
         const stub = document.createElement("div");
         stub.append(...showCheckList(toDo, value));
         array.push(stub);
-      } else if (element != "title") {
+      } else if (
+        element != "title" &&
+        element != "id" &&
+        element != "description"
+      ) {
         const stub = document.createElement("p");
         stub.className += ` ${idAble(element)}`;
         stub.textContent = value;

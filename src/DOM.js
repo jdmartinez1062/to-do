@@ -17,8 +17,11 @@ const init = () => {
   content.appendChild(sidebar);
   content.append(formButton, mainDiv);
   sidebar.appendChild(tabCreation());
+
   console.log(localStorage.getItem("Projects"));
-  const defaultProject = JSON.parse(localStorage.getItem("Projects"));
+
+  const defaultProject = JSON.parse(localStorage.getItem("Projects"))[0];
+
   showProject(defaultProject);
 };
 
