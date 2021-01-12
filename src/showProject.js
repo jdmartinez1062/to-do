@@ -40,7 +40,6 @@ const showProject = (element) => {
 
     title.addEventListener("click", () => {
       children = findToDo(element, children);
-      console.log(children);
       array = showToDo(children);
       if (elementDiv.children.length < 3) {
         expand.append(...array);
