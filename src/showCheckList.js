@@ -25,7 +25,6 @@ const showCheckList = (toDo, checklist) => {
     label.textContent = value.title;
     label.append(input);
     stub.append(label);
-    console.log(value);
     input.addEventListener("click", (e) => {
       e = e.target;
       for (let i = 0; i < project.toDo.length; i += 1) {

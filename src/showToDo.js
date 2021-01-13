@@ -9,7 +9,6 @@ const showToDo = (toDo) => {
     const element = whatever[0];
     
     if (toDo.hasOwnProperty(element)) {
-      console.log(element);
       if (element == "checkList") {
         const stub = document.createElement("div");
         stub.classList.add('center', 'is-flex', 'is-flex-direction-column');
@@ -38,7 +37,6 @@ const showToDo = (toDo) => {
       } 
     }
   });
-  console.log(array);
   return array;
 };
 

@@ -24,7 +24,6 @@ const init = () => {
   content.append(sidebar);
   content.append(mainDiv);
   sidebar.appendChild(tabCreation());
-  console.log(localStorage.getItem("Projects"));
   const defaultProject = JSON.parse(localStorage.getItem("Projects"));
   showProject(defaultProject);
 };

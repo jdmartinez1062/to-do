@@ -5,7 +5,6 @@ const CheckList = (id, title, status = false) => {
     } else {
       this.status = true;
     }
-    console.log(this.status);
   };
 
   return {

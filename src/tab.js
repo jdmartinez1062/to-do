@@ -49,8 +49,6 @@ const tabUpdate = (project, deleteP = false) => {
     pList.addEventListener("click", () => {
       appendToContent(findProject(project));
     });
-    console.log(pList);
-    console.log(tabList);
     pList.appendChild(pName);
     tabList.appendChild(pList);
     navigation.appendChild(tabList);
