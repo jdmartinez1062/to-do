@@ -33,17 +33,9 @@ const showCheckList = (toDo, checklist) => {
           for (let j = 0; j < actualToDo.checkList.length; j += 1) {
             if (actualToDo.checkList[j].id == e.id) {
               let actualCheckList = actualToDo.checkList[j];
-              console.log(actualToDo.checkList[j]);
-
               actualCheckList = actualToDo.checkList[j];
-              console.log("before");
-              console.log(actualCheckList);
-
               actualCheckList.status = actualCheckList.status ? false : true;
-              console.log("after");
-              console.log(actualCheckList);
               updateLocalStorage(project);
-              console.log(JSON.parse(localStorage.getItem("Projects")[1]));
             }
           }
         }
