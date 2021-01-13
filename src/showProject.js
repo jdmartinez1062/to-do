@@ -1,5 +1,7 @@
 import idAble from "./idAble";
 import showToDo from "./showToDo";
+import changePriority from "./changePriorityColor"
+
 const showProject = (element) => {
   const mainDiv = document.getElementById("main-div");
   mainDiv.classList.add('column')
@@ -31,13 +33,7 @@ const showProject = (element) => {
       array = showToDo(element);
       elementDiv.append(...array);
     // });
-      if (elementDiv.innerText.includes('high')) {
-        elementDiv.classList.toggle('is-danger')
-      } else if (elementDiv.innerText.includes('medium')) {
-        elementDiv.classList.toggle('is-warning')
-      } else {
-        elementDiv.classList.toggle('is-primary')
-      }
+      changePriority(elementDiv);
     mainDiv.append(elementDiv);
   });
 };
