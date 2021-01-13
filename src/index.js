@@ -46,6 +46,7 @@ const projectIndex = () => {
   const main = document.getElementById("main-div");
   for (let i = 0; i < projects.length; i += 1) {
     const projectTitle = document.createElement("a");
+    projectTitle.classList.add('box', 'm-5', 'p-5', 'notification', 'is-info')
     projectTitle.id = projects[i].id;
     projectTitle.textContent = projects[i].title;
     projectTitle.addEventListener("click", () => {

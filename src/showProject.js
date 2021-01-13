@@ -1,6 +1,7 @@
 import idAble from "./idAble";
 import showToDo from "./showToDo";
-import changePriority from "./changePriorityColor"
+import changePriority from "./changePriorityColor";
+import addLabel from "./addLabel";
 
 const showProject = (element) => {
   const mainDiv = document.getElementById("main-div");
@@ -18,6 +19,7 @@ const showProject = (element) => {
   element.toDo.forEach((element) => {
     const elementDiv = document.createElement("div");
     elementDiv.classList.add('notification', 'box', 'mr-2')
+    elementDiv.style.position = 'relative';
     elementDiv.setAttribute(
       "id",
       idAble(`${element.title} + ' ' + ${element.id}`)
@@ -32,8 +34,10 @@ const showProject = (element) => {
     // elementDiv.addEventListener("click", () => {
       array = showToDo(element);
       elementDiv.append(...array);
+
     // });
       changePriority(elementDiv);
+      addLabel(elementDiv);
     mainDiv.append(elementDiv);
   });
 };

@@ -19,6 +19,7 @@ const showCheckList = (toDo, checklist) => {
     input.checked = value.status;
     input.setAttribute("type", "checkbox");
     input.setAttribute("id", value.id);
+    input.classList.add('mx-3')
     input.dataset.checklist = value.id;
     input.dataset.toDo = toDo.id;
     label.textContent = value.title;
