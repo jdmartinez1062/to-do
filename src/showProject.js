@@ -29,12 +29,14 @@ const showProject = (element) => {
   element.toDo.forEach((children) => {
     const elementDiv = document.createElement("div");
 
-    elementDiv.classList.add("notification", "box", "mr-2");
+    elementDiv.classList.add("notification", "box", "mr-2", "is-warning");
     elementDiv.style.position = "relative";
     elementDiv.setAttribute("id", children.id);
 
     let description = document.createElement("p");
     let title = document.createElement("p");
+    title.style.cursor = 'pointer';
+    title.style.textDecoration = 'underline'
 
     title.textContent = children.title;
     description.textContent = children.description;
@@ -44,11 +46,15 @@ const showProject = (element) => {
     title.addEventListener("click", () => {
       children = findToDo(element, children);
       array = showToDo(children);
-      if (elementDiv.children.length < 3) {
+      if (elementDiv.children.length < 3 && expand.children.length < 3) {
         expand.append(...array);
-        console.log(array[array.length - 1].childNodes);
+        expand.classList.add('notification');
+        addLabel(expand);
+        changePriority(expand);
         elementDiv.append(expand);
       } else {
+        expand.classList = "do-detail";
+        deletePreviousContent(expand);
         for (let i = 0; i < elementDiv.children.length; i += 1) {
           if (i >= 2) {
             deletePreviousContent(elementDiv.children[i]);
@@ -59,11 +65,8 @@ const showProject = (element) => {
             );
           }
         }
-      }
+      } 
     });
-
-    changePriority(elementDiv);
-    addLabel(elementDiv);
     toDoMain.appendChild(elementDiv);
   });
 
