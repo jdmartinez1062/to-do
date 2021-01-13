@@ -39,9 +39,7 @@ window.onload = () => {
 
   localStorage.setItem("Projects", JSON.stringify(projects));
   init();
-  // load the default page
-  // put the tabs
-  // add binding events
+ 
 };
 
 const projectIndex = () => {
@@ -49,12 +47,11 @@ const projectIndex = () => {
   indexHolder.id = "index-holder";
   const projects = JSON.parse(localStorage.getItem("Projects"));
   const main = document.getElementById("main-div");
-  console.log(projects.length);
   for (let i = 0; i < projects.length; i += 1) {
     const projectTitle = document.createElement("a");
+    projectTitle.classList.add('box', 'm-5', 'p-5', 'notification', 'is-info')
     projectTitle.id = projects[i].id;
     projectTitle.textContent = projects[i].title;
-    console.log(projects[i].title);
     projectTitle.addEventListener("click", () => {
       deletePreviousContent(main);
       showProject(projects[i]);
@@ -63,7 +60,6 @@ const projectIndex = () => {
   }
 
   deletePreviousContent(main);
-  console.log(indexHolder.children);
   main.append(indexHolder);
 };
 export default projectIndex;

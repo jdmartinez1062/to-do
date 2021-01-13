@@ -1,19 +1,20 @@
 import showToDo from "./showToDo";
-
 import { deletePreviousContent } from "./DOM";
-
 import { findProject } from "./localStorageUpdate";
+import changePriority from "./changePriorityColor";
+import addLabel from "./addLabel";
 
 const showProject = (element) => {
   const mainDiv = document.getElementById("main-div");
+  mainDiv.classList.add("column");
   const titleP = document.createElement("h2");
   const descriptionP = document.createElement("p");
   let array = [];
 
   localStorage.setItem("actual-project", JSON.stringify(element));
 
-  titleP.textContent = element.title;
-  descriptionP.textContent = element.description;
+  titleP.textContent = `Project title: ${element.title}`;
+  descriptionP.textContent = `Description: ${element.description}`;
 
   const expand = document.createElement("div");
   const checkListTitle = document.createElement("h4");
@@ -28,6 +29,8 @@ const showProject = (element) => {
   element.toDo.forEach((children) => {
     const elementDiv = document.createElement("div");
 
+    elementDiv.classList.add("notification", "box", "mr-2");
+    elementDiv.style.position = "relative";
     elementDiv.setAttribute("id", children.id);
 
     let description = document.createElement("p");
@@ -59,8 +62,11 @@ const showProject = (element) => {
       }
     });
 
+    changePriority(elementDiv);
+    addLabel(elementDiv);
     toDoMain.appendChild(elementDiv);
   });
+
   mainDiv.append(toDoMain);
 };
 const findToDo = (project, toDo) => {

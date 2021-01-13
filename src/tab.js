@@ -8,6 +8,7 @@ const tabCreation = () => {
   navigation.id = "project-navigation";
   const tabList = document.createElement("ul");
   tabList.id = "project-nav-list";
+  tabList.classList.add('column');
   const projects = JSON.parse(localStorage.getItem("Projects"));
 
   let list = [];
@@ -48,8 +49,6 @@ const tabUpdate = (project, deleteP = false) => {
     pList.addEventListener("click", () => {
       appendToContent(findProject(project));
     });
-    console.log(pList);
-    console.log(tabList);
     pList.appendChild(pName);
     tabList.appendChild(pList);
     navigation.appendChild(tabList);
