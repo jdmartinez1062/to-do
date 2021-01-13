@@ -32,17 +32,17 @@
 
 ## Table of Contents
 
-- [Table of Contents](#table-of-contents)
-- [About The Project](#about-the-project)
-  - [Built With](#built-with)
-- [Getting Started](#getting-started)
-  - [Installation](#installation)
-- [Usage](#usage)
-- [Contact](#contact)
-- [Contributing](#contributing)
-- [Show your support](#show-your-support)
-- [Acknowledgments](#acknowledgments)
-- [License](#license)
+1. [Table of Contents](#table-of-contents)
+2. [About The Project](#about-the-project)
+   1. [Built With](#built-with)
+3. [Getting Started](#getting-started)
+   1. [Installation](#installation)
+4. [Usage](#usage)
+5. [Contact](#contact)
+6. [Contributing](#contributing)
+7. [Show your support](#show-your-support)
+8. [Acknowledgments](#acknowledgments)
+9. [License](#license)
 
 <!-- ABOUT THE PROJECT -->
 
@@ -126,16 +126,16 @@ This project is [MIT](lic.url) licensed.
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/jdmartinez1062/Library.svg?style=flat-square
-[contributors-url]: https://github.com/jdmartinez1062/Library/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/jdmartinez1062/Library.svg?style=flat-square
-[forks-url]: https://github.com/jdmartinez1062/Library/network/members
-[stars-shield]: https://img.shields.io/github/stars/jdmartinez1062/Library.svg?style=flat-square
-[stars-url]: https://github.com/jdmartinez1062/Library/stargazers
-[issues-shield]: https://img.shields.io/github/issues/jdmartinez1062/Library.svg?style=flat-square
-[issues-url]: https://github.com/jdmartinez1062/Library/issues
-[license-shield]: https://img.shields.io/github/license/jdmartinez1062/Library.svg?style=flat-square
-[license-url]: https://github.com/jdmartinez1062/Library/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/jdmartinez1062/to-do.svg?style=flat-square
+[contributors-url]: https://github.com/jdmartinez1062/to-do/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/jdmartinez1062/to-do.svg?style=flat-square
+[forks-url]: https://github.com/jdmartinez1062/to-do/network/members
+[stars-shield]: https://img.shields.io/github/stars/jdmartinez1062/to-do.svg?style=flat-square
+[stars-url]: https://github.com/jdmartinez1062/to-do/stargazers
+[issues-shield]: https://img.shields.io/github/issues/jdmartinez1062/to-do.svg?style=flat-square
+[issues-url]: https://github.com/jdmartinez1062/to-do/issues
+[license-shield]: https://img.shields.io/github/license/jdmartinez1062/to-do.svg?style=flat-square
+[license-url]: https://github.com/jdmartinez1062/to-do/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [product-screenshot]: imgs/screenshot.jpg
