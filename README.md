@@ -54,7 +54,7 @@ This is a project of the Javascript module. It is preceded by the lesson about O
 
 Project: JavaScript project, small list ToDo app. [Assignment link](https://www.theodinproject.com/courses/javascript/lessons/todo-list)
 
-Visit the finished project website: add live link here
+Visit the finished project website: [Live]()
 <div style="text-align:center">
   <a href="add live link here">
       <img src="screenshot.png" width="100%">
@@ -113,7 +113,7 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- and Microverse for the opportunity.
+- Microverse for the opportunity.
 
 ## License
 
