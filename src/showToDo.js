@@ -1,5 +1,6 @@
 import idAble from "./idAble";
 import showCheckList from "./showCheckList";
+import { formatDistance } from "date-fns";
 
 const showToDo = (toDo) => {
   const array = [];
@@ -14,12 +15,16 @@ const showToDo = (toDo) => {
         const stub = document.createElement("div");
         stub.append(...showCheckList(toDo, value));
         array.push(stub);
-      } else if (element != "title" && element != "id" && element != "description") {
+      } else if (element == "dueDate") {
+        const stub = document.createElement("p");
+        stub.innerText = (new Date(toDo.startDate).getTime() - new Date(toDo.dueDate).getTime())/ (1000 * 3600 * 24);
+        array.push(stub);
+      } else if (element != "title" && element != "id" && element != "description" && element != "startDate") {
         const stub = document.createElement("p");
         stub.className += ` ${idAble(element)}`;
         stub.textContent = value;
         array.push(stub);
-      }
+      } 
     }
   });
   console.log(array);
