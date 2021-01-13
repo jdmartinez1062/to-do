@@ -179,6 +179,12 @@ const findToDo = (project, toDo) => {
   return -1;
 };
 
+const deletePreviousContent = (parent) => {
+  while (parent.lastChild) {
+    parent.removeChild(parent.lastChild);
+  }
+};
+
 const showProject = (element) => {
   const mainDiv = document.getElementById('main-div');
   mainDiv.classList.add('column');
@@ -249,6 +255,31 @@ const showProject = (element) => {
 };
 
 
+const appendToContent = (object) => {
+  deletePreviousContent(document.getElementById('main-div'));
+  showProject(object);
+};
+
+
+const projectIndex = () => {
+  const indexHolder = document.createElement('div');
+  indexHolder.id = 'index-holder';
+  const projects = JSON.parse(localStorage.getItem('Projects'));
+  const main = document.getElementById('main-div');
+  for (let i = 0; i < projects.length; i += 1) {
+    const projectTitle = document.createElement('a');
+    projectTitle.id = projects[i].id;
+    projectTitle.textContent = projects[i].title;
+    projectTitle.addEventListener('click', () => {
+      deletePreviousContent(main);
+      showProject(projects[i]);
+    });
+    indexHolder.append(projectTitle);
+  }
+  deletePreviousContent(main);
+  main.append(indexHolder);
+};
+
 const tabCreation = () => {
   const navigation = document.createElement('nav');
   navigation.id = 'project-navigation';
@@ -282,6 +313,7 @@ const tabCreation = () => {
   return navigation;
 };
 
+
 const tabUpdate = (project, deleteP = false) => {
   if (!deleteP) {
     const navigation = document.getElementById('project-navigation');
@@ -303,6 +335,7 @@ const tabUpdate = (project, deleteP = false) => {
     projectD.remove();
   }
 };
+
 
 const appendToTab = (object) => {
   tabUpdate(object);
@@ -422,17 +455,6 @@ const form = () => {
     saveProject();
     deleteContent(mainForm);
   });
-};
-
-const deletePreviousContent = (parent) => {
-  while (parent.lastChild) {
-    parent.removeChild(parent.lastChild);
-  }
-};
-
-const appendToContent = (object) => {
-  deletePreviousContent(document.getElementById('main-div'));
-  showProject(object);
 };
 
 
