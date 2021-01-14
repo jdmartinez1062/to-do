@@ -1,0 +1,9 @@
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  margin-top: 2.25em;
+}
