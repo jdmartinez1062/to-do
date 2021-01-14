@@ -1,5 +1,3 @@
-const idAble = (element) => {
-  return element.split('\s+(?=[A-Z])').join('-').toLowerCase()
-};
+const idAble = (element) => element.split('s+(?=[A-Z])').join('-').toLowerCase();
 
 export default idAble;
