@@ -4,7 +4,6 @@ import Project from './project';
 import CheckList from './checkListObject';
 import { init } from './DOM';
 
-
 window.onload = () => {
   // eslint-disable-next-line no-unused-vars
   let defaultProject = Project(
