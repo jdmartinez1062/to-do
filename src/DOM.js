@@ -355,7 +355,7 @@ const toDoForm = () => {
   );
   mainForm.append(formToDo);
   closeButton.addEventListener('click', () => {
-    deleteContent(formToDo);
+    deleteContent(mainForm);
   });
 };
 
@@ -420,6 +420,7 @@ const saveProject = () => {
 
 const form = () => {
   const main = document.getElementById('main-div');
+  deletePreviousContent(main);
   const mainForm = document.createElement('div');
   const submitB = document.createElement('input');
   const formB = document.createElement('div');
