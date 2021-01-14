@@ -1,5 +1,3 @@
-import projectIndex from './index';
-
 const updateLocalStorage = (element) => {
   const projects = JSON.parse(localStorage.getItem('Projects'));
   for (let i = 0; i < projects.length; i += 1) {
@@ -21,12 +19,5 @@ const findProject = (project, index = false) => {
   }
   return -1;
 };
-const deleteProject = (project) => {
-  tabUpdate(findProject(project), true);
-  const actualP = findProject(project, true);
-  const projects = JSON.parse(localStorage.getItem('Projects'));
-  projects.splice(actualP, 1);
-  localStorage.setItem('Projects', JSON.stringify(projects));
-  projectIndex();
-};
-export { updateLocalStorage, findProject, deleteProject };
+
+export { updateLocalStorage, findProject };
