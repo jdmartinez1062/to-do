@@ -1,10 +1,8 @@
-const Project = (id, title, description, toDo = []) => {
-  return {
-    id,
-    title,
-    description,
-    toDo,
-  };
-};
+const Project = (id, title, description, toDo = []) => ({
+  id,
+  title,
+  description,
+  toDo,
+});
 
 export default Project;
