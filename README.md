@@ -54,10 +54,10 @@ This is a project of the Javascript module. It is preceded by the lesson about O
 
 Project: JavaScript project, small list ToDo app. [Assignment link](https://www.theodinproject.com/courses/javascript/lessons/todo-list)
 
-Visit the finished project website: [Live]()
+Visit the finished project website: [Live](https://jdmartinez1062.github.io/to-do/)
 <div style="text-align:center">
-  <a href="add live link here">
-      <img src="screenshot.png" width="100%">
+  <a href="https://jdmartinez1062.github.io/to-do/">
+      <img src="../to-do/dist/project.jpg" width="100%">
   </a>
 </div>
 
