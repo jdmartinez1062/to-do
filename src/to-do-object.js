@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format } from 'date-fns';
 
 const ToDo = (
   id,
@@ -6,19 +6,17 @@ const ToDo = (
   description,
   dueDate,
   priority,
-  notes = "",
-  checkList = []
-) => {
-  return {
-    id,
-    title,
-    description,
-    dueDate,
-    startDate: format(new Date(), "yyyy-MM-dd"),
-    priority,
-    notes,
-    checkList,
-  };
-};
+  notes = '',
+  checkList = [],
+) => ({
+  id,
+  title,
+  description,
+  dueDate,
+  startDate: format(new Date(), 'yyyy-MM-dd'),
+  priority,
+  notes,
+  checkList,
+});
 
 export default ToDo;

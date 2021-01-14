@@ -1,45 +1,6 @@
-import { tabCreation, tabUpdate } from "./tab";
-import form from "./form";
-import { showProject } from "./showProject";
-const init = () => {
-  const navbar = document.getElementById("navbar")
-  const content = document.getElementById("content");
-  const body = document.getElementById("main")
-  const sidebar = document.createElement("div");
-  const mainDiv = document.createElement("div");
-  const formButton = document.createElement("input");
-
-  body.append(navbar);
-  navbar.append(formButton);
-  navbar.classList.add('navbar', 'is-fixed-top');
-  formButton.id = "form-button";
-  formButton.type = "submit";
-  formButton.value = 'New Project'
-  formButton.classList.add('button', 'is-primary','is-fullwidth');
-  formButton.addEventListener("click", form);
- 
-  sidebar.setAttribute("id", "sidebar");
-  sidebar.classList.add('column', 'is-2')
-  mainDiv.setAttribute("id", "main-div");
-  content.append(sidebar);
-  content.append(mainDiv);
-  sidebar.appendChild(tabCreation());
-
-  console.log(localStorage.getItem("Projects"));
-
-  const defaultProject = JSON.parse(localStorage.getItem("Projects"))[0];
-
-  showProject(defaultProject);
-};
-
-const appendToContent = (object) => {
-  deletePreviousContent(document.getElementById("main-div"));
-  showProject(object);
-};
-
-const appendToTab = (object) => {
-  tabUpdate(object);
-};
+import { showProject } from './showProject';
+import { findProject } from './localStorageUpdate';
+import projectIndex from './index';
 
 const deletePreviousContent = (parent) => {
   while (parent.lastChild) {
@@ -47,12 +8,78 @@ const deletePreviousContent = (parent) => {
   }
 };
 
+const appendToContent = (object) => {
+  deletePreviousContent(document.getElementById('main-div'));
+  showProject(object);
+};
+
+const tabCreation = () => {
+  const navigation = document.createElement('nav');
+  navigation.id = 'project-navigation';
+  const tabList = document.createElement('ul');
+  tabList.id = 'project-nav-list';
+  tabList.classList.add('column');
+  const projects = JSON.parse(localStorage.getItem('Projects'));
+
+  let list = [];
+  const liIndex = document.createElement('li');
+  liIndex.id = 'project-index';
+  const index = document.createElement('a');
+  index.id = 'index';
+  index.textContent = 'Project Index';
+  index.addEventListener('click', projectIndex);
+  liIndex.append(index);
+  tabList.append(liIndex);
+  for (let i = 0; i < projects.length; i += 1) {
+    const link = document.createElement('a');
+    list = document.createElement('li');
+
+    list.id = projects[i].id;
+    link.textContent = projects[i].title;
+    link.addEventListener('click', () => {
+      appendToContent(findProject(projects[i]));
+    });
+    list.appendChild(link);
+    tabList.append(list);
+  }
+
+  navigation.appendChild(tabList);
+  return navigation;
+};
+
+const tabUpdate = (project, deleteP = false) => {
+  if (!deleteP) {
+    const navigation = document.getElementById('project-navigation');
+    const tabList = document.getElementById('project-nav-list');
+    const pName = document.createElement('a');
+
+    pName.textContent = project.title;
+    const pList = document.createElement('li');
+    pList.id = project.id;
+
+    pList.addEventListener('click', () => {
+      appendToContent(findProject(project));
+    });
+    pList.appendChild(pName);
+    tabList.appendChild(pList);
+    navigation.appendChild(tabList);
+  } else {
+    const projectD = document.getElementById(project.id);
+    projectD.remove();
+  }
+};
+
+const appendToTab = (object) => {
+  tabUpdate(object);
+};
+
 const deleteContent = (content) => {
   document.getElementById(content.id).remove();
 };
 
 export {
-  init,
+  tabCreation,
+  tabUpdate,
   appendToContent,
   appendToTab,
   deletePreviousContent,
