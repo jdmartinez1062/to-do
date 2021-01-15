@@ -338,6 +338,7 @@ const toDoForm = () => {
   const namePriority = uuidv4();
 
   const pToDoTitle = document.createElement('input');
+  pToDoTitle.setAttribute('required', true);
   pToDoTitle.placeholder = 'Add a title for something you need ToDo in this project.';
   pToDoTitle.classList.add('input', 'is-small', 'is-info');
   const pToDoTitleL = document.createElement('label');
@@ -567,7 +568,7 @@ const form = () => {
 
   submitB.addEventListener('click', () => {
     saveProject();
-    deleteContent(mainForm);
+    deleteContent(main);
   });
 };
 
