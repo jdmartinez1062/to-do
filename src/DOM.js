@@ -72,9 +72,19 @@ const showProject = (element) => {
   element.toDo.forEach((children) => {
     const elementDiv = document.createElement('div');
 
-    elementDiv.classList.add('notification', 'box', 'mr-2', 'is-warning');
+    elementDiv.classList.add('notification', 'box', 'mr-2', 'is-warning', 'mt-2');
     elementDiv.style.position = 'relative';
     elementDiv.setAttribute('id', children.id);
+
+    const deleteButton = document.createElement('input');
+    // deleteButton.dataset.id = 
+    deleteButton.style.float = 'right';
+    deleteButton.style.zIndex = '2'
+    // deleteButton.style.top = '10px';
+    // deleteButton.style.right = '10px';
+    deleteButton.innerText = 'Delete ToDo';
+    deleteButton.classList.add('button', 'is-danger', 'mr-2');
+
 
     const description = document.createElement('p');
     const title = document.createElement('p');
@@ -83,6 +93,7 @@ const showProject = (element) => {
 
     title.textContent = children.title;
     description.textContent = children.description;
+    elementDiv.appendChild(deleteButton);
     elementDiv.appendChild(title);
     elementDiv.appendChild(description);
 
@@ -110,7 +121,7 @@ const showProject = (element) => {
         }
       }
     });
-    toDoMain.appendChild(elementDiv);
+    toDoMain.append(elementDiv);
   });
 
   mainDiv.append(deleteThisProject, toDoMain);
