@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from 'uuid';
-import { sub } from 'date-fns';
 import { findProject, updateLocalStorage } from './localStorageUpdate';
 import showToDo from './showToDo';
 import changePriority from './changePriorityColor';
@@ -76,7 +75,6 @@ const editToDo = (element) => {
     const project = findProject(objectT);
     const toDo = findToDo(project, objectC);
 
-    console.log(toDo);
     if (element.dataset.object === 'title') {
       toDo.title = editField.value;
     } else if (element.dataset.object === 'description') {
