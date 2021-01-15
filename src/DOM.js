@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { findProject } from './localStorageUpdate';
+import { findProject, updateLocalStorage } from './localStorageUpdate';
 import showToDo from './showToDo';
 import changePriority from './changePriorityColor';
 import addLabel from './addLabel';
@@ -15,11 +15,16 @@ const deletePreviousContent = (parent) => {
 };
 
 
-const findToDo = (project, toDo) => {
+const findToDo = (project, toDo, index = false) => {
   project = findProject(project);
   for (let i = 0; i < project.toDo.length; i += 1) {
+    console.log(toDo.id);
     if (project.toDo[i].id === toDo.id) {
-      return project.toDo[i];
+      if (!index) {
+        return project.toDo[i];
+      } else {
+        return i;
+      }
     }
   }
   return -1;
@@ -77,14 +82,20 @@ const showProject = (element) => {
     elementDiv.setAttribute('id', children.id);
 
     const deleteButton = document.createElement('input');
-    // deleteButton.dataset.id = 
+    deleteButton.dataset.id = children.id;
     deleteButton.style.float = 'right';
     deleteButton.style.zIndex = '2'
-    // deleteButton.style.top = '10px';
-    // deleteButton.style.right = '10px';
-    deleteButton.innerText = 'Delete ToDo';
+    deleteButton.value = 'Delete ToDo';
     deleteButton.classList.add('button', 'is-danger', 'mr-2');
-
+    deleteButton.addEventListener('click', (e) => {
+      e = e.target;
+      const buttonDeleteIndex = e;
+      buttonDeleteIndex.id = e.dataset.id
+      const toDoIndex = findToDo(element, buttonDeleteIndex, true);
+      element.toDo.splice(toDoIndex, 1);
+      updateLocalStorage(element);
+      deleteContent(document.getElementById(children.id));
+    })
 
     const description = document.createElement('p');
     const title = document.createElement('p');
@@ -100,7 +111,7 @@ const showProject = (element) => {
     title.addEventListener('click', () => {
       children = findToDo(element, children);
       array = showToDo(children);
-      if (elementDiv.children.length < 3 && expand.children.length < 3) {
+      if (elementDiv.children.length < 4 && expand.children.length < 3) {
         expand.append(...array);
         expand.classList.add('notification');
         addLabel(expand);
@@ -110,7 +121,7 @@ const showProject = (element) => {
         expand.classList = 'do-detail';
         deletePreviousContent(expand);
         for (let i = 0; i < elementDiv.children.length; i += 1) {
-          if (i >= 2) {
+          if (i >= 3) {
             deletePreviousContent(elementDiv.children[i]);
             elementDiv.removeChild(elementDiv.childNodes[i]);
             localStorage.setItem(
