@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import { sub } from 'date-fns';
 import { findProject, updateLocalStorage } from './localStorageUpdate';
 import showToDo from './showToDo';
 import changePriority from './changePriorityColor';
@@ -7,6 +8,9 @@ import CheckList from './checkListObject';
 import ToDo from './to-do-object';
 import Project from './project';
 
+const deleteContent = (content) => {
+  document.getElementById(content.id).remove();
+};
 
 const deletePreviousContent = (parent) => {
   while (parent.lastChild) {
@@ -14,17 +18,14 @@ const deletePreviousContent = (parent) => {
   }
 };
 
-
 const findToDo = (project, toDo, index = false) => {
   project = findProject(project);
   for (let i = 0; i < project.toDo.length; i += 1) {
-    console.log(toDo.id);
     if (project.toDo[i].id === toDo.id) {
       if (!index) {
         return project.toDo[i];
-      } else {
-        return i;
       }
+      return i;
     }
   }
   return -1;
@@ -33,6 +34,59 @@ const findToDo = (project, toDo, index = false) => {
 const deleteTab = (project) => {
   const projectD = document.getElementById(project.id);
   projectD.remove();
+};
+
+const editToDo = (element) => {
+  const formHolder = document.createElement('div');
+  formHolder.id = 'to-do-form';
+  formHolder.classList = 'modal';
+  const holderHolder = document.createElement('div');
+  holderHolder.classList = 'modal-content';
+
+  const title = document.createElement('h2');
+  title.textContent = 'Edit Field';
+  title.classList = 'label';
+
+  const editField = document.createElement('input');
+  editField.type = 'text';
+  editField.value = element.textContent;
+  editField.classList = 'input';
+
+  const submit = document.createElement('input');
+  submit.type = 'submit';
+  submit.classList = 'button is-success';
+
+
+  const main = document.getElementById('main-div');
+  formHolder.classList = 'edit-form';
+  holderHolder.append(title, editField);
+  const background = document.createElement('div');
+  background.classList = 'modal-background';
+  formHolder.append(background, holderHolder, submit);
+
+  main.append(formHolder);
+
+  submit.addEventListener('click', () => {
+    const target = document.getElementById(element.id);
+    target.textContent = editField.value;
+    deleteContent(formHolder);
+
+    const objectT = { id: element.dataset.project };
+    const objectC = { id: element.dataset.id };
+    const project = findProject(objectT);
+    const toDo = findToDo(project, objectC);
+
+    console.log(toDo);
+    if (element.dataset.object === 'title') {
+      toDo.title = editField.value;
+    } else if (element.dataset.object === 'description') {
+      toDo.description = editField.value;
+    }
+
+    const toDoIndex = findToDo(project, toDo, true);
+    project.toDo[toDoIndex] = toDo;
+    updateLocalStorage(project);
+  });
 };
 
 
@@ -84,34 +138,59 @@ const showProject = (element) => {
     const deleteButton = document.createElement('input');
     deleteButton.dataset.id = children.id;
     deleteButton.style.float = 'right';
-    deleteButton.style.zIndex = '2'
+    deleteButton.style.zIndex = '2';
     deleteButton.value = 'Delete ToDo';
     deleteButton.classList.add('button', 'is-danger', 'mr-2');
     deleteButton.addEventListener('click', (e) => {
       e = e.target;
       const buttonDeleteIndex = e;
-      buttonDeleteIndex.id = e.dataset.id
+      buttonDeleteIndex.id = e.dataset.id;
       const toDoIndex = findToDo(element, buttonDeleteIndex, true);
       element.toDo.splice(toDoIndex, 1);
       updateLocalStorage(element);
       deleteContent(document.getElementById(children.id));
-    })
+    });
 
     const description = document.createElement('p');
     const title = document.createElement('p');
-    title.style.cursor = 'pointer';
-    title.style.textDecoration = 'underline';
 
+    title.style.fontWeight = 600;
     title.textContent = children.title;
     description.textContent = children.description;
+
+    title.dataset.object = 'title';
+    title.dataset.project = element.id;
+    title.dataset.id = children.id;
+    title.id = uuidv4();
+    description.dataset.id = children.id;
+    description.dataset.project = element.id;
+    description.dataset.object = 'description';
+    description.id = uuidv4();
+
+    title.addEventListener('dblclick', (e) => {
+      e = e.target;
+      editToDo(e);
+    });
+
+    description.addEventListener('dblclick', (e) => {
+      e = e.target;
+      editToDo(e);
+    });
+
+    const toDoDetail = document.createElement('i');
+    toDoDetail.classList = 'arrow';
+    title.style.display = 'inline';
+
     elementDiv.appendChild(deleteButton);
-    elementDiv.appendChild(title);
+    elementDiv.append(title, toDoDetail);
     elementDiv.appendChild(description);
 
-    title.addEventListener('click', () => {
+
+    toDoDetail.addEventListener('click', () => {
+      toDoDetail.classList.toggle('up');
       children = findToDo(element, children);
       array = showToDo(children);
-      if (elementDiv.children.length < 4 && expand.children.length < 3) {
+      if (elementDiv.children.length < 5 && expand.children.length < 3) {
         expand.append(...array);
         expand.classList.add('notification');
         addLabel(expand);
@@ -121,7 +200,7 @@ const showProject = (element) => {
         expand.classList = 'do-detail';
         deletePreviousContent(expand);
         for (let i = 0; i < elementDiv.children.length; i += 1) {
-          if (i >= 3) {
+          if (i >= 4) {
             deletePreviousContent(elementDiv.children[i]);
             elementDiv.removeChild(elementDiv.childNodes[i]);
             localStorage.setItem(
@@ -218,10 +297,6 @@ const tabCreation = () => {
 
 const appendToTab = (object) => {
   tabUpdate(object);
-};
-
-const deleteContent = (content) => {
-  document.getElementById(content.id).remove();
 };
 
 
