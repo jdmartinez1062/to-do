@@ -568,7 +568,8 @@ const form = () => {
 
   submitB.addEventListener('click', () => {
     saveProject();
-    deleteContent(main);
+    deleteContent(mainForm);
+    projectIndex();
   });
 };
 
