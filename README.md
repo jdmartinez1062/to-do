@@ -32,17 +32,17 @@
 
 ## Table of Contents
 
-1. [Table of Contents](#table-of-contents)
-2. [About The Project](#about-the-project)
-   1. [Built With](#built-with)
-3. [Getting Started](#getting-started)
-   1. [Installation](#installation)
-4. [Usage](#usage)
-5. [Contact](#contact)
-6. [Contributing](#contributing)
-7. [Show your support](#show-your-support)
-8. [Acknowledgments](#acknowledgments)
-9. [License](#license)
+- [Table of Contents](#table-of-contents)
+- [About The Project](#about-the-project)
+  - [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Installation](#installation)
+- [Usage](#usage)
+- [Contact](#contact)
+- [Contributing](#contributing)
+- [Show your support](#show-your-support)
+- [Acknowledgments](#acknowledgments)
+- [License](#license)
 
 <!-- ABOUT THE PROJECT -->
 
@@ -57,7 +57,7 @@ Project: JavaScript project, small list ToDo app. [Assignment link](https://www.
 Visit the finished project website: [Live](https://jdmartinez1062.github.io/to-do/)
 <div style="text-align:center">
   <a href="https://jdmartinez1062.github.io/to-do/">
-      <img src="../to-do/dist/project.jpg" width="100%">
+      <img src="dist/project.jpg" width="100%">
   </a>
 </div>
 
