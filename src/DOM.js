@@ -265,8 +265,9 @@ const showProject = (element) => {
   const descriptionP = document.createElement('p');
   const deleteThisProject = document.createElement('input');
   deleteThisProject.type = 'submit';
-  deleteThisProject.classList = 'button is-danger';
-  deleteThisProject.value = 'Delete this project';
+  deleteThisProject.style.float = 'right';
+  deleteThisProject.classList = 'button is-danger my-4 mx-2';
+  deleteThisProject.value = 'Delete Project';
   deleteThisProject.addEventListener('click', () => {
     deleteTab(findProject(element));
     const actualP = findProject(element, true);
@@ -390,7 +391,7 @@ const showProject = (element) => {
     toDoMain.append(elementDiv);
   });
 
-  mainDiv.append(deleteThisProject, toDoMain, addToDo);
+  mainDiv.append(toDoMain, addToDo, deleteThisProject);
 };
 
 
