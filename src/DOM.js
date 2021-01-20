@@ -116,12 +116,7 @@ const checkToDo = (holder) => {
 };
 
 const toDoForm = (edit) => {
-  let mainForm = document.getElementById('form-project');
-  if (edit) {
-    mainForm = document.getElementById('main-div');
-  } else {
-    mainForm = document.getElementById('form-project');
-  }
+  const mainForm = document.getElementById('main-div');
   const toDoHolder = document.createElement('div');
   toDoHolder.style.position = 'relative';
   toDoHolder.id = 'to-do-holder';
@@ -247,6 +242,17 @@ const toDoForm = (edit) => {
   );
   toDoHolder.append(formToDo);
   mainForm.append(toDoHolder);
+  if (edit) {
+    const submitToDo = document.createElement('input');
+    submitToDo.type = 'submit';
+    submitToDo.value = 'Create new Project';
+    submitToDo.classList.add('button', 'is-success', 'is-align-self-center');
+    submitToDo.addEventListener('click', () => {
+      // eslint-disable-next-line no-use-before-define
+      validateForm(edit);
+    });
+    mainForm.append(submitToDo);
+  }
   closeButton.addEventListener('click', () => {
     deleteContent(toDoHolder);
   });
@@ -293,7 +299,7 @@ const showProject = (element) => {
   addToDo.value = 'Add New ToDo';
   addToDo.classList.add('button', 'is-link', 'is-light', 'is-outlined', 'my-4');
   addToDo.addEventListener('click', () => {
-    toDoForm(true);
+    toDoForm(element);
   });
 
   mainDiv.append(titleP, descriptionP);
@@ -388,6 +394,32 @@ const showProject = (element) => {
 };
 
 
+const appendToContent = (object) => {
+  deletePreviousContent(document.getElementById('main-div'));
+  showProject(object);
+};
+
+const tabUpdate = (project) => {
+  const navigation = document.getElementById('project-navigation');
+  const tabList = document.getElementById('project-nav-list');
+  const pName = document.createElement('a');
+
+  pName.textContent = project.title;
+  const pList = document.createElement('li');
+  pList.id = project.id;
+
+  pList.addEventListener('click', () => {
+    appendToContent(findProject(project));
+  });
+  pList.appendChild(pName);
+  tabList.appendChild(pList);
+  navigation.appendChild(tabList);
+};
+
+const appendToTab = (object) => {
+  tabUpdate(object);
+};
+
 const projectIndex = () => {
   const indexHolder = document.createElement('div');
   indexHolder.id = 'index-holder';
@@ -409,26 +441,143 @@ const projectIndex = () => {
   main.append(indexHolder);
 };
 
-const appendToContent = (object) => {
-  deletePreviousContent(document.getElementById('main-div'));
-  showProject(object);
+const saveProject = (element) => {
+  if (element) {
+    const actualProjectIndex = findProject(element, true);
+    const projects = JSON.parse(localStorage.getItem('Projects'));
+    const holderToDo = document.getElementById('to-do-holder');
+    let array = [];
+    let arrayChecklist = [];
+    let arrayCheck = [];
+    let priorityBoolean = false;
+    for (let i = 0; i < holderToDo.children.length; i += 1) {
+      const toDoDiv = holderToDo.children[i].children;
+      for (let j = 0; j < toDoDiv.length; j += 1) {
+        const element = toDoDiv[j];
+        if (element.tagName === 'LABEL') {
+          array.push(element.children[0].value);
+        } else if (element.tagName === 'DIV') {
+          if (element.classList.contains('radio-holder')) {
+            const radio = element.children[1].children;
+            for (let u = 0; u < radio.length; u += 1) {
+              const radioInput = radio[u].children[0];
+              if (radioInput.checked) {
+                array.push(radioInput.value);
+                priorityBoolean = true;
+              }
+            }
+            if (!priorityBoolean) {
+              array.push('medium');
+            }
+            priorityBoolean = false;
+          } else {
+            const checkDiv = element.children;
+            for (let k = 0; k < checkDiv.length; k += 1) {
+              const checkElement = checkDiv[k].children[0];
+              arrayChecklist = checkElement.children[0].value;
+              arrayCheck.push(CheckList(uuidv4(), arrayChecklist));
+            }
+          }
+        }
+      }
+      projects[actualProjectIndex].toDo.push(ToDo(uuidv4(), ...array, arrayCheck));
+      array = [];
+      arrayCheck = [];
+    }
+    localStorage.setItem('Projects', JSON.stringify(projects));
+  } else {
+    const projectTitle = document.getElementById('pTitle').value;
+    const projectDescription = document.getElementById('pDescription').value;
+    const holderToDo = document.getElementById('to-do-holder');
+    let array = [];
+    let arrayChecklist = [];
+    let arrayCheck = [];
+    const arrayToDo = [];
+    let priorityBoolean = false;
+    for (let i = 0; i < holderToDo.children.length; i += 1) {
+      const toDoDiv = holderToDo.children[i].children;
+      for (let j = 0; j < toDoDiv.length; j += 1) {
+        const element = toDoDiv[j];
+        if (element.tagName === 'LABEL') {
+          array.push(element.children[0].value);
+        } else if (element.tagName === 'DIV') {
+          if (element.classList.contains('radio-holder')) {
+            const radio = element.children[1].children;
+            for (let u = 0; u < radio.length; u += 1) {
+              const radioInput = radio[u].children[0];
+              if (radioInput.checked) {
+                array.push(radioInput.value);
+                priorityBoolean = true;
+              }
+            }
+            if (!priorityBoolean) {
+              array.push('medium');
+            }
+            priorityBoolean = false;
+          } else {
+            const checkDiv = element.children;
+            for (let k = 0; k < checkDiv.length; k += 1) {
+              const checkElement = checkDiv[k].children[0];
+              arrayChecklist = checkElement.children[0].value;
+              arrayCheck.push(CheckList(uuidv4(), arrayChecklist));
+            }
+          }
+        }
+      }
+      arrayToDo.push(ToDo(uuidv4(), ...array, arrayCheck));
+      array = [];
+      arrayCheck = [];
+    }
+
+    const projects = JSON.parse(localStorage.getItem('Projects'));
+    const pholder = Project(
+      uuidv4(),
+      projectTitle,
+      projectDescription,
+      arrayToDo,
+    );
+    projects.push(pholder);
+    appendToTab(pholder);
+    localStorage.setItem('Projects', JSON.stringify(projects));
+  }
 };
 
-const tabUpdate = (project) => {
-  const navigation = document.getElementById('project-navigation');
-  const tabList = document.getElementById('project-nav-list');
-  const pName = document.createElement('a');
-
-  pName.textContent = project.title;
-  const pList = document.createElement('li');
-  pList.id = project.id;
-
-  pList.addEventListener('click', () => {
-    appendToContent(findProject(project));
-  });
-  pList.appendChild(pName);
-  tabList.appendChild(pList);
-  navigation.appendChild(tabList);
+const validateForm = (element) => {
+  const mainForm = document.createElement('div');
+  const input = [...document.getElementsByClassName('input-form')];
+  if (input.some((element) => element.value === '')) {
+    const modalError = document.createElement('div');
+    modalError.classList.add('modal', 'is-active');
+    const modalErrorBg = document.createElement('div');
+    modalErrorBg.classList.add('modal-background');
+    const modalErrorContent = document.createElement('div');
+    modalErrorContent.classList.add('modal-content');
+    const p = document.createElement('p');
+    p.classList.add('center', 'box');
+    p.textContent = 'Please, fill in every input of the form.';
+    p.style.zIndex = '9';
+    const buttonCloseModal = document.createElement('button');
+    buttonCloseModal.classList.add('modal-close', 'is-large');
+    buttonCloseModal.setAttribute('aria-label', 'close');
+    buttonCloseModal.style.zIndex = '9';
+    buttonCloseModal.addEventListener('click', () => {
+      modalError.remove();
+    });
+    const main = document.getElementById('main');
+    modalErrorContent.append(p);
+    modalError.append(modalErrorBg, buttonCloseModal, modalErrorContent);
+    main.append(modalError);
+  } else {
+    saveProject(element);
+    mainForm.remove();
+    if (element) {
+      const main = document.getElementById('main-div');
+      deletePreviousContent(main);
+      showProject(findProject(element));
+    } else {
+      projectIndex();
+    }
+  }
 };
 
 const tabCreation = () => {
@@ -463,99 +612,6 @@ const tabCreation = () => {
 
   navigation.appendChild(tabList);
   return navigation;
-};
-
-const appendToTab = (object) => {
-  tabUpdate(object);
-};
-
-const saveProject = () => {
-  const projectTitle = document.getElementById('pTitle').value;
-  const projectDescription = document.getElementById('pDescription').value;
-  const holderToDo = document.getElementById('to-do-holder');
-  let array = [];
-  let arrayChecklist = [];
-  let arrayCheck = [];
-  const arrayToDo = [];
-  let priorityBoolean = false;
-
-  for (let i = 0; i < holderToDo.children.length; i += 1) {
-    const toDoDiv = holderToDo.children[i].children;
-    for (let j = 0; j < toDoDiv.length; j += 1) {
-      const element = toDoDiv[j];
-      if (element.tagName === 'LABEL') {
-        array.push(element.children[0].value);
-      } else if (element.tagName === 'DIV') {
-        if (element.classList.contains('radio-holder')) {
-          const radio = element.children[1].children;
-          for (let u = 0; u < radio.length; u += 1) {
-            const radioInput = radio[u].children[0];
-            if (radioInput.checked) {
-              array.push(radioInput.value);
-              priorityBoolean = true;
-            }
-          }
-          if (!priorityBoolean) {
-            array.push('medium');
-          }
-          priorityBoolean = false;
-        } else {
-          const checkDiv = element.children;
-          for (let k = 0; k < checkDiv.length; k += 1) {
-            const checkElement = checkDiv[k].children[0];
-            arrayChecklist = checkElement.children[0].value;
-            arrayCheck.push(CheckList(uuidv4(), arrayChecklist));
-          }
-        }
-      }
-    }
-    arrayToDo.push(ToDo(uuidv4(), ...array, arrayCheck));
-    array = [];
-    arrayCheck = [];
-  }
-
-  const projects = JSON.parse(localStorage.getItem('Projects'));
-  const pholder = Project(
-    uuidv4(),
-    projectTitle,
-    projectDescription,
-    arrayToDo,
-  );
-  projects.push(pholder);
-  appendToTab(pholder);
-  localStorage.setItem('Projects', JSON.stringify(projects));
-};
-
-const validateForm = () => {
-  const mainForm = document.createElement('div');
-  const input = [...document.getElementsByClassName('input-form')];
-  if (input.some((element) => element.value === '')) {
-    const modalError = document.createElement('div');
-    modalError.classList.add('modal', 'is-active');
-    const modalErrorBg = document.createElement('div');
-    modalErrorBg.classList.add('modal-background');
-    const modalErrorContent = document.createElement('div');
-    modalErrorContent.classList.add('modal-content');
-    const p = document.createElement('p');
-    p.classList.add('center', 'box');
-    p.textContent = 'Please, fill in every input of the form.';
-    p.style.zIndex = '9';
-    const buttonCloseModal = document.createElement('button');
-    buttonCloseModal.classList.add('modal-close', 'is-large');
-    buttonCloseModal.setAttribute('aria-label', 'close');
-    buttonCloseModal.style.zIndex = '9';
-    buttonCloseModal.addEventListener('click', () => {
-      modalError.remove();
-    });
-    const main = document.getElementById('main');
-    modalErrorContent.append(p);
-    modalError.append(modalErrorBg, buttonCloseModal, modalErrorContent);
-    main.append(modalError);
-  } else {
-    saveProject();
-    mainForm.remove();
-    projectIndex();
-  }
 };
 
 const form = () => {
@@ -601,7 +657,9 @@ const form = () => {
   addToDo.type = 'submit';
   addToDo.value = 'Add New ToDo';
   addToDo.classList.add('button', 'is-link', 'is-light', 'is-outlined', 'my-4');
-  addToDo.addEventListener('click', toDoForm(false));
+  addToDo.addEventListener('click', () => {
+    toDoForm(false);
+  });
 
   formB.append(h2Project);
   holdProject.append(h2Project, pTitleL, pDescriptionL);
