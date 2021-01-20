@@ -124,6 +124,14 @@ const showProject = (element) => {
   const toDoTitle = document.createElement('h3');
   toDoTitle.textContent = 'To Do list';
   const toDoMain = document.createElement('div');
+  const addToDo = document.createElement('input');
+  addToDo.type = 'submit';
+  addToDo.value = 'Add New ToDo';
+  addToDo.classList.add('button', 'is-link', 'is-light', 'is-outlined', 'my-4');
+  addToDo.addEventListener('click', () => {
+    toDoForm(true);
+  });
+
   mainDiv.append(titleP, descriptionP);
   toDoMain.append(toDoTitle);
   element.toDo.forEach((children) => {
@@ -212,7 +220,7 @@ const showProject = (element) => {
     toDoMain.append(elementDiv);
   });
 
-  mainDiv.append(deleteThisProject, toDoMain);
+  mainDiv.append(deleteThisProject, toDoMain, addToDo);
 };
 
 
@@ -326,9 +334,13 @@ const checkToDo = (holder) => {
   });
 };
 
-
-const toDoForm = () => {
-  const mainForm = document.getElementById('form-project');
+const toDoForm = (edit) => {
+  let mainForm = document.getElementById('form-project');
+  if (edit) {
+    mainForm = document.getElementById('main-div');
+  } else {
+    mainForm = document.getElementById('form-project');
+  }
   const toDoHolder = document.createElement('div');
   toDoHolder.style.position = 'relative';
   toDoHolder.id = 'to-do-holder';
@@ -592,7 +604,7 @@ const form = () => {
   addToDo.type = 'submit';
   addToDo.value = 'Add New ToDo';
   addToDo.classList.add('button', 'is-link', 'is-light', 'is-outlined', 'my-4');
-  addToDo.addEventListener('click', toDoForm);
+  addToDo.addEventListener('click', toDoForm(false));
 
   formB.append(h2Project);
   holdProject.append(h2Project, pTitleL, pDescriptionL);
