@@ -116,13 +116,12 @@ const checkToDo = (holder) => {
 };
 
 const toDoForm = (edit) => {
-  const mainForm = document.getElementById('main-div');
-  const toDoHolder = document.createElement('div');
+  const mainForm = document.getElementById('main-form');
+  const toDoHolder = document.getElementById('to-do-holder');
   toDoHolder.style.position = 'relative';
   toDoHolder.id = 'to-do-holder';
-  toDoHolder.classList.add('box');
-  toDoHolder.style.backgroundColor = 'skyblue';
   const formToDo = document.createElement('div');
+  formToDo.style.backgroundColor = 'skyblue';
   formToDo.id = uuidv4();
   formToDo.classList.add('box');
   formToDo.style.position = 'relative';
@@ -254,8 +253,30 @@ const toDoForm = (edit) => {
     toDoHolder.append(submitToDo);
   }
   closeButton.addEventListener('click', () => {
-    deleteContent(toDoHolder);
+    deleteContent(formToDo);
   });
+};
+
+const projectIndex = () => {
+  const indexHolder = document.createElement('div');
+  indexHolder.id = 'index-holder';
+  const projects = JSON.parse(localStorage.getItem('Projects'));
+  const main = document.getElementById('main-div');
+  for (let i = 0; i < projects.length; i += 1) {
+    const projectTitle = document.createElement('a');
+    projectTitle.classList.add('box', 'm-5', 'p-5', 'notification', 'is-info');
+    projectTitle.id = projects[i].id;
+    projectTitle.textContent = projects[i].title;
+    projectTitle.addEventListener('click', () => {
+      deletePreviousContent(main);
+      // eslint-disable-next-line no-use-before-define
+      showProject(projects[i]);
+    });
+    indexHolder.append(projectTitle);
+  }
+
+  deletePreviousContent(main);
+  main.append(indexHolder);
 };
 
 const showProject = (element) => {
@@ -265,10 +286,23 @@ const showProject = (element) => {
   const descriptionP = document.createElement('p');
   const deleteThisProject = document.createElement('input');
   deleteThisProject.type = 'submit';
-  deleteThisProject.style.float = 'right';
   deleteThisProject.classList = 'button is-danger my-4 mx-2';
   deleteThisProject.value = 'Delete Project';
   deleteThisProject.addEventListener('click', () => {
+    deleteTab(findProject(element));
+    const actualP = findProject(element, true);
+    const projects = JSON.parse(localStorage.getItem('Projects'));
+    projects.splice(actualP, 1);
+    localStorage.setItem('Projects', JSON.stringify(projects));
+    deletePreviousContent(mainDiv);
+    projectIndex();
+  });
+
+  const editProject = document.createElement('input');
+  editProject.type = 'submit';
+  editProject.classList = 'button is-warning my-4 mx-2';
+  editProject.value = 'Edit Project';
+  editProject.addEventListener('click', () => {
     deleteTab(findProject(element));
     const actualP = findProject(element, true);
     const projects = JSON.parse(localStorage.getItem('Projects'));
@@ -280,6 +314,7 @@ const showProject = (element) => {
     warning.classList.add('notification');
     mainDiv.append(warning);
   });
+
   let array = [];
 
   localStorage.setItem('actual-project', JSON.stringify(element));
@@ -390,8 +425,10 @@ const showProject = (element) => {
     });
     toDoMain.append(elementDiv);
   });
-
-  mainDiv.append(toDoMain, addToDo, deleteThisProject);
+  const buttonHolder = document.createElement('div');
+  buttonHolder.classList.add('is-flex', 'is-justify-content-space-between');
+  buttonHolder.append(addToDo, editProject, deleteThisProject);
+  mainDiv.append(toDoMain, buttonHolder);
 };
 
 
@@ -421,29 +458,8 @@ const appendToTab = (object) => {
   tabUpdate(object);
 };
 
-const projectIndex = () => {
-  const indexHolder = document.createElement('div');
-  indexHolder.id = 'index-holder';
-  const projects = JSON.parse(localStorage.getItem('Projects'));
-  const main = document.getElementById('main-div');
-  for (let i = 0; i < projects.length; i += 1) {
-    const projectTitle = document.createElement('a');
-    projectTitle.classList.add('box', 'm-5', 'p-5', 'notification', 'is-info');
-    projectTitle.id = projects[i].id;
-    projectTitle.textContent = projects[i].title;
-    projectTitle.addEventListener('click', () => {
-      deletePreviousContent(main);
-      showProject(projects[i]);
-    });
-    indexHolder.append(projectTitle);
-  }
-
-  deletePreviousContent(main);
-  main.append(indexHolder);
-};
-
 const saveProject = (element) => {
-  if (element) {
+  if (element != null) {
     const actualProjectIndex = findProject(element, true);
     const projects = JSON.parse(localStorage.getItem('Projects'));
     const holderToDo = document.getElementById('to-do-holder');
@@ -495,6 +511,9 @@ const saveProject = (element) => {
     let arrayCheck = [];
     const arrayToDo = [];
     let priorityBoolean = false;
+    console.log(holderToDo);
+    console.log(holderToDo.children);
+    console.log(holderToDo.children.length)
     for (let i = 0; i < holderToDo.children.length; i += 1) {
       const toDoDiv = holderToDo.children[i].children;
       for (let j = 0; j < toDoDiv.length; j += 1) {
@@ -625,11 +644,15 @@ const form = () => {
   main.classList.add('is-flex', 'is-flex-direction-column', 'column', 'is-9');
   mainForm.id = 'main-form';
 
+  const toDoHolder = document.createElement('div');
+  toDoHolder.style.position = 'relative';
+  toDoHolder.id = 'to-do-holder';
+  toDoHolder.classList.add('my-2');
+
   submitB.type = 'submit';
   submitB.value = 'Create new Project';
   submitB.classList.add('button', 'is-success', 'is-align-self-center');
   const holdProject = document.createElement('div');
-  holdProject.id = 'form-project';
   const pTitle = document.createElement('input');
   pTitle.classList.add('input', 'input-form');
   pTitle.placeholder = 'Add a title for your new project.';
@@ -663,9 +686,12 @@ const form = () => {
   });
 
   formB.append(h2Project);
-  holdProject.append(h2Project, pTitleL, pDescriptionL);
-  mainForm.append(holdProject, addToDo);
-  main.append(mainForm, submitB);
+  holdProject.append(h2Project, pTitleL, pDescriptionL, toDoHolder);
+  mainForm.append(holdProject);
+  const buttonHolder = document.createElement('div');
+  buttonHolder.append(addToDo, submitB);
+  buttonHolder.classList.add('is-flex', 'is-justify-content-space-between');
+  main.append(mainForm, buttonHolder);
 
   submitB.addEventListener('click', () => {
     validateForm();
