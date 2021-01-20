@@ -116,8 +116,15 @@ const checkToDo = (holder) => {
 };
 
 const toDoForm = (edit) => {
-  const mainForm = document.getElementById('main-form');
-  const toDoHolder = document.getElementById('to-do-holder');
+  let mainForm = document.getElementById('main-form');
+  const mainDiv = document.getElementById('main-div');
+  let toDoHolder = document.getElementById('to-do-holder');
+  if (edit) {
+    mainForm = document.createElement('div');
+    mainForm.id = 'main-form';
+    toDoHolder = document.createElement('div');
+    toDoHolder.id = 'to-do-holder';
+  }
   toDoHolder.style.position = 'relative';
   toDoHolder.id = 'to-do-holder';
   const formToDo = document.createElement('div');
@@ -242,15 +249,19 @@ const toDoForm = (edit) => {
   toDoHolder.append(formToDo);
   mainForm.append(toDoHolder);
   if (edit) {
+    mainDiv.append(toDoHolder);
+    const divHolder = document.createElement('div');
+    divHolder.classList.add('is-flex', 'is-justify-content-center', 'mt-3');
     const submitToDo = document.createElement('input');
     submitToDo.type = 'submit';
     submitToDo.value = 'Add New ToDo';
-    submitToDo.classList.add('button', 'is-success', 'is-align-self-center');
+    submitToDo.classList.add('button', 'is-success', 'my-2');
     submitToDo.addEventListener('click', () => {
       // eslint-disable-next-line no-use-before-define
       validateForm(edit);
     });
-    toDoHolder.append(submitToDo);
+    divHolder.append(submitToDo);
+    formToDo.append(divHolder);
   }
   closeButton.addEventListener('click', () => {
     deleteContent(formToDo);
@@ -330,6 +341,7 @@ const showProject = (element) => {
   const toDoTitle = document.createElement('h3');
   toDoTitle.textContent = 'To Do list';
   const toDoMain = document.createElement('div');
+  toDoMain.id = 'to-do-holder';
   const addToDo = document.createElement('input');
   addToDo.type = 'submit';
   addToDo.value = 'Add New ToDo';
