@@ -298,7 +298,7 @@ const showProject = (element) => {
   const addToDo = document.createElement('input');
   addToDo.type = 'submit';
   addToDo.value = 'Add New ToDo';
-  addToDo.classList.add('button', 'is-link', 'is-light', 'is-outlined', 'my-4');
+  addToDo.classList.add('button', 'is-link', 'my-4');
   addToDo.addEventListener('click', () => {
     toDoForm(element);
   });
