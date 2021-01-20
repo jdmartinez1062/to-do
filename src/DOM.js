@@ -341,7 +341,7 @@ const showProject = (element) => {
   const toDoTitle = document.createElement('h3');
   toDoTitle.textContent = 'To Do list';
   const toDoMain = document.createElement('div');
-  toDoMain.id = 'to-do-holder';
+  // toDoMain.id = 'to-do-holder';
   const addToDo = document.createElement('input');
   addToDo.type = 'submit';
   addToDo.value = 'Add New ToDo';
@@ -471,6 +471,7 @@ const appendToTab = (object) => {
 };
 
 const saveProject = (element) => {
+  // console.log(element);
   if (element != null) {
     const actualProjectIndex = findProject(element, true);
     const projects = JSON.parse(localStorage.getItem('Projects'));
@@ -481,8 +482,11 @@ const saveProject = (element) => {
     let priorityBoolean = false;
     for (let i = 0; i < holderToDo.children.length; i += 1) {
       const toDoDiv = holderToDo.children[i].children;
+      console.log(toDoDiv);
       for (let j = 0; j < toDoDiv.length; j += 1) {
         const element = toDoDiv[j];
+        console.log(element.children.children);
+        
         if (element.tagName === 'LABEL') {
           array.push(element.children[0].value);
         } else if (element.tagName === 'DIV') {
@@ -499,10 +503,11 @@ const saveProject = (element) => {
               array.push('medium');
             }
             priorityBoolean = false;
-          } else {
+          } else if (!element.children[0].classList.contains('button')) {
             const checkDiv = element.children;
             for (let k = 0; k < checkDiv.length; k += 1) {
               const checkElement = checkDiv[k].children[0];
+              console.log(checkElement)
               arrayChecklist = checkElement.children[0].value;
               arrayCheck.push(CheckList(uuidv4(), arrayChecklist));
             }
