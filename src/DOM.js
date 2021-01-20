@@ -328,9 +328,12 @@ const checkToDo = (holder) => {
 
 
 const toDoForm = () => {
-  const mainForm = document.getElementById('to-do-holder');
-  mainForm.classList.add('box');
-  mainForm.style.backgroundColor = 'skyblue';
+  const mainForm = document.getElementById('form-project');
+  const toDoHolder = document.createElement('div');
+  toDoHolder.style.position = 'relative';
+  toDoHolder.id = 'to-do-holder';
+  toDoHolder.classList.add('box');
+  toDoHolder.style.backgroundColor = 'skyblue';
   const formToDo = document.createElement('div');
   formToDo.id = uuidv4();
   formToDo.classList.add('box');
@@ -449,9 +452,10 @@ const toDoForm = () => {
     addCheckTodo,
     checkToDoHolder,
   );
-  mainForm.append(formToDo);
+  toDoHolder.append(formToDo);
+  mainForm.append(toDoHolder);
   closeButton.addEventListener('click', () => {
-    deleteContent(mainForm);
+    deleteContent(toDoHolder);
   });
 };
 
@@ -553,15 +557,13 @@ const form = () => {
   const formB = document.createElement('div');
   formB.classList.toggle('formProject');
   main.classList.add('is-flex', 'is-flex-direction-column', 'column', 'is-9');
-  const toDoHolder = document.createElement('div');
-  toDoHolder.style.position = 'relative';
-  toDoHolder.id = 'to-do-holder';
   mainForm.id = 'main-form';
 
   submitB.type = 'submit';
   submitB.value = 'Create new Project';
   submitB.classList.add('button', 'is-success', 'is-align-self-center');
   const holdProject = document.createElement('div');
+  holdProject.id = 'form-project';
   const pTitle = document.createElement('input');
   pTitle.classList.add('input', 'input-form');
   pTitle.placeholder = 'Add a title for your new project.';
@@ -593,7 +595,7 @@ const form = () => {
   addToDo.addEventListener('click', toDoForm);
 
   formB.append(h2Project);
-  holdProject.append(h2Project, pTitleL, pDescriptionL, toDoHolder);
+  holdProject.append(h2Project, pTitleL, pDescriptionL);
   mainForm.append(holdProject, addToDo);
   main.append(mainForm, submitB);
 
