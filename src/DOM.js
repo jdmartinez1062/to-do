@@ -245,13 +245,13 @@ const toDoForm = (edit) => {
   if (edit) {
     const submitToDo = document.createElement('input');
     submitToDo.type = 'submit';
-    submitToDo.value = 'Create new Project';
+    submitToDo.value = 'Add New ToDo';
     submitToDo.classList.add('button', 'is-success', 'is-align-self-center');
     submitToDo.addEventListener('click', () => {
       // eslint-disable-next-line no-use-before-define
       validateForm(edit);
     });
-    mainForm.append(submitToDo);
+    toDoHolder.append(submitToDo);
   }
   closeButton.addEventListener('click', () => {
     deleteContent(toDoHolder);
