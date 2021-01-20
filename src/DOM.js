@@ -482,11 +482,8 @@ const saveProject = (element) => {
     let priorityBoolean = false;
     for (let i = 0; i < holderToDo.children.length; i += 1) {
       const toDoDiv = holderToDo.children[i].children;
-      console.log(toDoDiv);
       for (let j = 0; j < toDoDiv.length; j += 1) {
         const element = toDoDiv[j];
-        console.log(element.children.children);
-        
         if (element.tagName === 'LABEL') {
           array.push(element.children[0].value);
         } else if (element.tagName === 'DIV') {
@@ -507,7 +504,6 @@ const saveProject = (element) => {
             const checkDiv = element.children;
             for (let k = 0; k < checkDiv.length; k += 1) {
               const checkElement = checkDiv[k].children[0];
-              console.log(checkElement)
               arrayChecklist = checkElement.children[0].value;
               arrayCheck.push(CheckList(uuidv4(), arrayChecklist));
             }
@@ -528,9 +524,6 @@ const saveProject = (element) => {
     let arrayCheck = [];
     const arrayToDo = [];
     let priorityBoolean = false;
-    console.log(holderToDo);
-    console.log(holderToDo.children);
-    console.log(holderToDo.children.length)
     for (let i = 0; i < holderToDo.children.length; i += 1) {
       const toDoDiv = holderToDo.children[i].children;
       for (let j = 0; j < toDoDiv.length; j += 1) {
