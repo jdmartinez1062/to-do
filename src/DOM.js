@@ -265,6 +265,7 @@ const editToDo = (element) => {
   addToDo.value = 'Add New ToDo';
   addToDo.classList.add('button', 'is-link', 'is-light', 'is-outlined', 'my-4');
 
+  // eslint-disable-next-line consistent-return
   element.toDo.forEach((todo) => {
     toDoHolder.style.position = 'relative';
     toDoHolder.id = 'to-do-holder';
