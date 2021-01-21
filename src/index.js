@@ -30,7 +30,6 @@ window.onload = () => {
         '21-12-2020',
         'high',
         'First ToDo Note',
-        false,
       ),
     ],
   );
