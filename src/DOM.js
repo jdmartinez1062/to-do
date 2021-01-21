@@ -231,7 +231,7 @@ const editToDo = (element) => {
   toDoHolder.classList.add('my-2');
 
   submitB.type = 'submit';
-  submitB.value = 'Create new Project';
+  submitB.value = 'Save Project';
   submitB.classList.add('button', 'is-success', 'is-align-self-center');
   const holdProject = document.createElement('div');
   const pTitle = document.createElement('input');
