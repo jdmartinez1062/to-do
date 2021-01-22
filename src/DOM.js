@@ -531,7 +531,6 @@ const showProject = (element) => {
   const toDoTitle = document.createElement('h3');
   toDoTitle.textContent = 'To Do list';
   const toDoMain = document.createElement('div');
-  // toDoMain.id = 'to-do-holder';
   const addToDo = document.createElement('input');
   addToDo.type = 'submit';
   addToDo.value = 'Add New ToDo';
@@ -661,7 +660,6 @@ const appendToTab = (object) => {
 };
 
 const saveProject = (element) => {
-  // console.log(element);
   if (element != null) {
     const actualProjectIndex = findProject(element, true);
     const projects = JSON.parse(localStorage.getItem('Projects'));
@@ -690,7 +688,7 @@ const saveProject = (element) => {
               array.push('medium');
             }
             priorityBoolean = false;
-          } else if (!element.children[0].classList.contains('button')) {
+          } else if (element.children[0] && !element.children[0].classList.contains('button')) {
             const checkDiv = element.children;
             for (let k = 0; k < checkDiv.length; k += 1) {
               const checkElement = checkDiv[k].children[0];
