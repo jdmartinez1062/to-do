@@ -58,7 +58,7 @@ Project: JavaScript project, small list ToDo app. [Assignment link](https://www.
 Visit the finished project website: [Live](https://jdmartinez1062.github.io/to-do/)
 <div style="text-align:center">
   <a href="https://jdmartinez1062.github.io/to-do/">
-      <img src="dist/project.jpg" width="100%">
+      <img src="dist/project.gif" width="100%">
   </a>
 </div>
 
