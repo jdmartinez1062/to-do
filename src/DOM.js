@@ -376,38 +376,34 @@ const editToDo = (element) => {
     addCheckTodo.type = 'submit';
     addCheckTodo.value = 'Add Check-ToDo (List of things you need to accomplish to finish the ToDo).';
 
-    try {
-      todo.checkList.forEach(element => {
-        const pCheckTitle = document.createElement('input');
-        pCheckTitle.placeholder = 'Title for the Check-ToDo.';
-        pCheckTitle.classList.add('input', 'is-small', 'is-primary', 'input-form');
-        const pCheckTitleL = document.createElement('label');
-        pCheckTitleL.classList.add('label', 'is-small', 'is-primary', 'my-4');
-        const holdCheck = document.createElement('div');
-        holdCheck.classList.add('is-flex', 'center');
-        const closeButton = document.createElement('span');
-        const checkId = element.id;
-        holdCheck.id = checkId;
+    todo.checkList.forEach(element => {
+      const pCheckTitle = document.createElement('input');
+      pCheckTitle.placeholder = 'Title for the Check-ToDo.';
+      pCheckTitle.classList.add('input', 'is-small', 'is-primary', 'input-form');
+      const pCheckTitleL = document.createElement('label');
+      pCheckTitleL.classList.add('label', 'is-small', 'is-primary', 'my-4');
+      const holdCheck = document.createElement('div');
+      holdCheck.classList.add('is-flex', 'center');
+      const closeButton = document.createElement('span');
+      const checkId = element.id;
+      holdCheck.id = checkId;
 
-        closeButton.style.cursor = 'pointer';
-        closeButton.classList.add('delete', 'mt-4', 'ml-3');
-        closeButton.classList.toggle = 'close';
-        closeButton.innerHTML = '&times;';
+      closeButton.style.cursor = 'pointer';
+      closeButton.classList.add('delete', 'mt-4', 'ml-3');
+      closeButton.classList.toggle = 'close';
+      closeButton.innerHTML = '&times;';
 
-        pCheckTitle.setAttribute('type', 'text');
-        pCheckTitle.value = element.title;
-        pCheckTitleL.textContent = 'Add a CheckList';
+      pCheckTitle.setAttribute('type', 'text');
+      pCheckTitle.value = element.title;
+      pCheckTitleL.textContent = 'Add a CheckList';
 
-        pCheckTitleL.append(pCheckTitle);
-        holdCheck.append(pCheckTitleL, closeButton);
-        checkToDoHolder.append(holdCheck);
-        closeButton.addEventListener('click', () => {
-          document.getElementById(holdCheck.id).remove();
-        });
+      pCheckTitleL.append(pCheckTitle);
+      holdCheck.append(pCheckTitleL, closeButton);
+      checkToDoHolder.append(holdCheck);
+      closeButton.addEventListener('click', () => {
+        document.getElementById(holdCheck.id).remove();
       });
-    } catch (e) {
-      return [];
-    }
+    });
 
     addCheckTodo.addEventListener('click', () => {
       checkToDo(checkToDoHolder);
