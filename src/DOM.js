@@ -301,7 +301,7 @@ const appendToTab = (object) => {
 const checkToDo = (holder) => {
   const pCheckTitle = document.createElement('input');
   pCheckTitle.placeholder = 'Title for the Check-ToDo.';
-  pCheckTitle.classList.add('input', 'is-small', 'is-primary', 'input-form');
+  pCheckTitle.classList.add('input', 'is-small', 'is-primary');
   const pCheckTitleL = document.createElement('label');
   pCheckTitleL.classList.add('label', 'is-small', 'is-primary', 'my-4');
   const holdCheck = document.createElement('div');
@@ -338,9 +338,8 @@ const toDoForm = () => {
   const namePriority = uuidv4();
 
   const pToDoTitle = document.createElement('input');
-  pToDoTitle.setAttribute('required', true);
   pToDoTitle.placeholder = 'Add a title for something you need ToDo in this project.';
-  pToDoTitle.classList.add('input', 'is-small', 'is-info', 'input-form');
+  pToDoTitle.classList.add('input', 'is-small', 'is-info');
   const pToDoTitleL = document.createElement('label');
   pToDoTitleL.classList.add('label', 'is-small');
 
@@ -350,7 +349,7 @@ const toDoForm = () => {
 
   const pToDoDescription = document.createElement('textarea');
   pToDoDescription.placeholder = 'Add the description of this ToDo.';
-  pToDoDescription.classList.add('textarea', 'is-small', 'is-info', 'input-form');
+  pToDoDescription.classList.add('textarea', 'is-small', 'is-info');
   pToDoDescription.rows = '5';
   const pToDoDescriptionL = document.createElement('label');
   pToDoDescriptionL.classList.add('label', 'is-small');
@@ -362,7 +361,7 @@ const toDoForm = () => {
   const pToDoDueDate = document.createElement('input');
   pToDoDueDate.classList.add('mx-2', 'is-small');
   const pToDoDueDateL = document.createElement('label');
-  pToDoDueDateL.classList.add('is-small', 'is-info', 'label', 'input-form');
+  pToDoDueDateL.classList.add('is-small', 'is-info', 'label');
 
   pToDoDueDate.setAttribute('type', 'date');
   pToDoDueDateL.textContent = 'ToDo Due Date';
@@ -413,7 +412,7 @@ const toDoForm = () => {
 
   const pToDoNotes = document.createElement('textarea');
   pToDoNotes.placeholder = 'Here you can add some notes for the ToDo.';
-  pToDoNotes.classList.add('textarea', 'is-small', 'is-info', 'input-form');
+  pToDoNotes.classList.add('textarea', 'is-small', 'is-info');
   pToDoNotes.row = '5';
   const pToDoNotesL = document.createElement('label');
   pToDoNotesL.textContent = 'Notes';
@@ -513,37 +512,6 @@ const saveProject = () => {
   localStorage.setItem('Projects', JSON.stringify(projects));
 };
 
-const validateForm = () => {
-  const mainForm = document.createElement('div');
-  const input = [...document.getElementsByClassName('input-form')];
-  if (input.some((element) => element.value === '')) {
-    const modalError = document.createElement('div');
-    modalError.classList.add('modal', 'is-active');
-    const modalErrorBg = document.createElement('div');
-    modalErrorBg.classList.add('modal-background');
-    const modalErrorContent = document.createElement('div');
-    modalErrorContent.classList.add('modal-content');
-    const p = document.createElement('p');
-    p.classList.add('center', 'box');
-    p.textContent = 'Please, fill in every input of the form.';
-    p.style.zIndex = '9';
-    const buttonCloseModal = document.createElement('button');
-    buttonCloseModal.classList.add('modal-close', 'is-large');
-    buttonCloseModal.setAttribute('aria-label', 'close');
-    buttonCloseModal.style.zIndex = '9';
-    buttonCloseModal.addEventListener('click', () => {
-      modalError.remove();
-    });
-    const main = document.getElementById('main');
-    modalErrorContent.append(p);
-    modalError.append(modalErrorBg, buttonCloseModal, modalErrorContent);
-    main.append(modalError);
-  } else {
-    saveProject();
-    mainForm.remove();
-    projectIndex();
-  }
-};
 
 const form = () => {
   const main = document.getElementById('main-div');
@@ -563,7 +531,7 @@ const form = () => {
   submitB.classList.add('button', 'is-success', 'is-align-self-center');
   const holdProject = document.createElement('div');
   const pTitle = document.createElement('input');
-  pTitle.classList.add('input', 'input-form');
+  pTitle.classList.add('input');
   pTitle.placeholder = 'Add a title for your new project.';
   const pTitleL = document.createElement('label');
   pTitleL.classList.add('label');
@@ -575,7 +543,7 @@ const form = () => {
   const pDescription = document.createElement('textarea');
   pDescription.placeholder = 'Add a description of your new project.';
   pDescription.rows = '5';
-  pDescription.classList.add('textarea', 'input-form');
+  pDescription.classList.add('textarea');
   const pDescriptionL = document.createElement('label');
   pDescriptionL.classList.add('label');
   pDescription.setAttribute('type', 'text');
@@ -598,7 +566,8 @@ const form = () => {
   main.append(mainForm, submitB);
 
   submitB.addEventListener('click', () => {
-    validateForm();
+    saveProject();
+    deleteContent(mainForm);
   });
 };
 
