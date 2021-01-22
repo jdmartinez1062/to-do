@@ -817,7 +817,7 @@ const tabCreation = () => {
   liIndex.id = 'project-index';
   const index = document.createElement('a');
   index.id = 'index';
-  index.textContent = 'Project Index';
+  index.textContent = 'All Projects are Shown Here';
   index.addEventListener('click', projectIndex);
   liIndex.append(index);
   tabList.append(liIndex);
@@ -932,6 +932,7 @@ const init = () => {
   const defaultProject = JSON.parse(localStorage.getItem('Projects'))[0];
 
   showProject(defaultProject);
+  projectIndex();
 };
 
 
