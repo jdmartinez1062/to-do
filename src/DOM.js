@@ -63,157 +63,154 @@ const checkToDo = (holder) => {
   });
 };
 
-const toDoForm = (edit) => {
-  let mainForm = document.getElementById('main-form');
-  const mainDiv = document.getElementById('main-div');
-  let toDoHolder = document.getElementById('to-do-holder');
-  if (edit) {
-    mainForm = document.createElement('div');
-    mainForm.id = 'main-form';
-    toDoHolder = document.createElement('div');
-    toDoHolder.id = 'to-do-holder';
-  }
-  toDoHolder.style.position = 'relative';
-  toDoHolder.id = 'to-do-holder';
-  const formToDo = document.createElement('div');
-  formToDo.style.backgroundColor = 'skyblue';
-  formToDo.id = uuidv4();
-  formToDo.classList.add('box');
-  formToDo.style.position = 'relative';
-  const namePriority = uuidv4();
+const appendToContent = (object) => {
+  deletePreviousContent(document.getElementById('main-div'));
+  // eslint-disable-next-line no-use-before-define
+  showProject(object);
+};
 
-  const pToDoTitle = document.createElement('input');
-  pToDoTitle.setAttribute('required', true);
-  pToDoTitle.placeholder = 'Add a title for something you need ToDo in this project.';
-  pToDoTitle.classList.add('input', 'is-small', 'is-info', 'input-form');
-  const pToDoTitleL = document.createElement('label');
-  pToDoTitleL.classList.add('label', 'is-small');
+const tabUpdate = (project) => {
+  const navigation = document.getElementById('project-navigation');
+  const tabList = document.getElementById('project-nav-list');
+  const pName = document.createElement('a');
 
-  pToDoTitle.setAttribute('type', 'text');
-  pToDoTitleL.textContent = 'ToDo Title';
-  pToDoTitleL.appendChild(pToDoTitle);
+  pName.textContent = project.title;
+  const pList = document.createElement('li');
+  pList.id = project.id;
 
-  const pToDoDescription = document.createElement('textarea');
-  pToDoDescription.placeholder = 'Add the description of this ToDo.';
-  pToDoDescription.classList.add('textarea', 'is-small', 'is-info', 'input-form');
-  pToDoDescription.rows = '5';
-  const pToDoDescriptionL = document.createElement('label');
-  pToDoDescriptionL.classList.add('label', 'is-small');
-
-  pToDoDescription.setAttribute('type', 'text');
-  pToDoDescriptionL.textContent = 'ToDo Description';
-  pToDoDescriptionL.appendChild(pToDoDescription);
-
-  const pToDoDueDate = document.createElement('input');
-  pToDoDueDate.classList.add('mx-2', 'is-small');
-  const pToDoDueDateL = document.createElement('label');
-  pToDoDueDateL.classList.add('is-small', 'is-info', 'label', 'input-form');
-
-  pToDoDueDate.setAttribute('type', 'date');
-  pToDoDueDateL.textContent = 'ToDo Due Date';
-  pToDoDueDateL.appendChild(pToDoDueDate);
-
-  const pToDoPriorityH = document.createElement('input');
-  pToDoPriorityH.classList.add('ml-1');
-  const pToDoPriorityHL = document.createElement('label');
-  pToDoPriorityHL.classList.add('is-small', 'label');
-
-  pToDoPriorityH.setAttribute('type', 'radio');
-  pToDoPriorityH.setAttribute('value', 'high');
-  pToDoPriorityH.setAttribute('name', `${namePriority}`);
-  pToDoPriorityHL.textContent = 'High';
-  pToDoPriorityHL.appendChild(pToDoPriorityH);
-
-  const pToDoPriorityM = document.createElement('input');
-  pToDoPriorityM.classList.add('ml-1');
-  const pToDoPriorityML = document.createElement('label');
-  pToDoPriorityML.classList.add('is-small', 'label');
-
-  pToDoPriorityM.setAttribute('type', 'radio');
-  pToDoPriorityM.setAttribute('value', 'medium');
-  pToDoPriorityM.setAttribute('name', `${namePriority}`);
-  pToDoPriorityML.textContent = 'Medium';
-  pToDoPriorityML.appendChild(pToDoPriorityM);
-
-  const pToDoPriorityL = document.createElement('input');
-  pToDoPriorityL.classList.add('ml-1');
-  const pToDoPriorityLL = document.createElement('label');
-  pToDoPriorityLL.classList.add('is-small', 'label');
-
-  pToDoPriorityL.setAttribute('type', 'radio');
-  pToDoPriorityL.setAttribute('value', 'low');
-  pToDoPriorityL.setAttribute('name', `${namePriority}`);
-  pToDoPriorityLL.textContent = 'Low';
-  pToDoPriorityLL.appendChild(pToDoPriorityL);
-
-  const radioHold = document.createElement('div');
-  radioHold.classList.toggle('radio-holder');
-  radioHold.classList.add('py-2');
-  const radioText = document.createElement('p');
-  radioText.classList.add('is-small', 'label');
-  radioText.textContent = 'Pick your ToDo level of priority';
-  const hold = document.createElement('div');
-  hold.append(pToDoPriorityHL, pToDoPriorityML, pToDoPriorityLL);
-  radioHold.append(radioText, hold);
-
-  const pToDoNotes = document.createElement('textarea');
-  pToDoNotes.placeholder = 'Here you can add some notes for the ToDo.';
-  pToDoNotes.classList.add('textarea', 'is-small', 'is-info', 'input-form');
-  pToDoNotes.row = '5';
-  const pToDoNotesL = document.createElement('label');
-  pToDoNotesL.textContent = 'Notes';
-  pToDoNotesL.classList.add('label', 'is-small', 'is-info');
-
-  pToDoNotesL.append(pToDoNotes);
-
-  const checkToDoHolder = document.createElement('div');
-  const addCheckTodo = document.createElement('input');
-  addCheckTodo.classList.add('is-link', 'button');
-  addCheckTodo.type = 'submit';
-  addCheckTodo.value = 'Add Check-ToDo (List of things you need to accomplish to finish the ToDo).';
-  addCheckTodo.addEventListener('click', () => {
-    checkToDo(checkToDoHolder);
+  pList.addEventListener('click', () => {
+    appendToContent(findProject(project));
   });
+  pList.appendChild(pName);
+  tabList.appendChild(pList);
+  navigation.appendChild(tabList);
+};
 
-  const closeButton = document.createElement('span');
-  closeButton.style.position = 'absolute';
-  closeButton.style.top = '10px';
-  closeButton.style.right = '10px';
-  closeButton.classList.add('delete');
-  closeButton.style.cursor = 'pointer';
-  closeButton.classList.toggle = 'close';
-  closeButton.innerHTML = '&times;';
+const appendToTab = (object) => {
+  tabUpdate(object);
+};
 
-  formToDo.append(
-    pToDoTitleL,
-    pToDoDescriptionL,
-    pToDoDueDateL,
-    radioHold,
-    pToDoNotesL,
-    closeButton,
-    addCheckTodo,
-    checkToDoHolder,
-  );
-  toDoHolder.append(formToDo);
-  mainForm.append(toDoHolder);
-  if (edit) {
-    mainDiv.append(toDoHolder);
-    const divHolder = document.createElement('div');
-    divHolder.classList.add('is-flex', 'is-justify-content-center', 'mt-3');
-    const submitToDo = document.createElement('input');
-    submitToDo.type = 'submit';
-    submitToDo.value = 'Add New ToDo';
-    submitToDo.classList.add('button', 'is-success', 'my-2');
-    submitToDo.addEventListener('click', () => {
+const projectIndex = () => {
+  const indexHolder = document.createElement('div');
+  indexHolder.id = 'index-holder';
+  const projects = JSON.parse(localStorage.getItem('Projects'));
+  const main = document.getElementById('main-div');
+  for (let i = 0; i < projects.length; i += 1) {
+    const projectTitle = document.createElement('a');
+    projectTitle.classList.add('box', 'm-5', 'p-5', 'notification', 'is-info');
+    projectTitle.id = projects[i].id;
+    projectTitle.textContent = projects[i].title;
+    projectTitle.addEventListener('click', () => {
+      deletePreviousContent(main);
       // eslint-disable-next-line no-use-before-define
-      validateForm(edit);
+      showProject(projects[i]);
     });
-    divHolder.append(submitToDo);
-    formToDo.append(divHolder);
+    indexHolder.append(projectTitle);
   }
-  closeButton.addEventListener('click', () => {
-    deleteContent(formToDo);
-  });
+
+  deletePreviousContent(main);
+  main.append(indexHolder);
+};
+
+const saveProject = (element) => {
+  if (element != null) {
+    const actualProjectIndex = findProject(element, true);
+    const projects = JSON.parse(localStorage.getItem('Projects'));
+    const holderToDo = document.getElementById('to-do-holder');
+    let array = [];
+    let arrayChecklist = [];
+    let arrayCheck = [];
+    let priorityBoolean = false;
+    for (let i = 0; i < holderToDo.children.length; i += 1) {
+      const toDoDiv = holderToDo.children[i].children;
+      for (let j = 0; j < toDoDiv.length; j += 1) {
+        const element = toDoDiv[j];
+        if (element.tagName === 'LABEL') {
+          array.push(element.children[0].value);
+        } else if (element.tagName === 'DIV') {
+          if (element.classList.contains('radio-holder')) {
+            const radio = element.children[1].children;
+            for (let u = 0; u < radio.length; u += 1) {
+              const radioInput = radio[u].children[0];
+              if (radioInput.checked) {
+                array.push(radioInput.value);
+                priorityBoolean = true;
+              }
+            }
+            if (!priorityBoolean) {
+              array.push('medium');
+            }
+            priorityBoolean = false;
+          } else if (element.children[0] && !element.children[0].classList.contains('button')) {
+            const checkDiv = element.children;
+            for (let k = 0; k < checkDiv.length; k += 1) {
+              const checkElement = checkDiv[k].children[0];
+              arrayChecklist = checkElement.children[0].value;
+              arrayCheck.push(CheckList(uuidv4(), arrayChecklist));
+            }
+          }
+        }
+      }
+      projects[actualProjectIndex].toDo.push(ToDo(uuidv4(), ...array, arrayCheck));
+      array = [];
+      arrayCheck = [];
+    }
+    localStorage.setItem('Projects', JSON.stringify(projects));
+  } else {
+    const projectTitle = document.getElementById('pTitle').value;
+    const projectDescription = document.getElementById('pDescription').value;
+    const holderToDo = document.getElementById('to-do-holder');
+    let array = [];
+    let arrayChecklist = [];
+    let arrayCheck = [];
+    const arrayToDo = [];
+    let priorityBoolean = false;
+    for (let i = 0; i < holderToDo.children.length; i += 1) {
+      const toDoDiv = holderToDo.children[i].children;
+      for (let j = 0; j < toDoDiv.length; j += 1) {
+        const element = toDoDiv[j];
+        if (element.tagName === 'LABEL') {
+          array.push(element.children[0].value);
+        } else if (element.tagName === 'DIV') {
+          if (element.classList.contains('radio-holder')) {
+            const radio = element.children[1].children;
+            for (let u = 0; u < radio.length; u += 1) {
+              const radioInput = radio[u].children[0];
+              if (radioInput.checked) {
+                array.push(radioInput.value);
+                priorityBoolean = true;
+              }
+            }
+            if (!priorityBoolean) {
+              array.push('medium');
+            }
+            priorityBoolean = false;
+          } else {
+            const checkDiv = element.children;
+            for (let k = 0; k < checkDiv.length; k += 1) {
+              const checkElement = checkDiv[k].children[0];
+              arrayChecklist = checkElement.children[0].value;
+              arrayCheck.push(CheckList(uuidv4(), arrayChecklist));
+            }
+          }
+        }
+      }
+      arrayToDo.push(ToDo(uuidv4(), ...array, arrayCheck));
+      array = [];
+      arrayCheck = [];
+    }
+
+    const projects = JSON.parse(localStorage.getItem('Projects'));
+    const pholder = Project(
+      uuidv4(),
+      projectTitle,
+      projectDescription,
+      arrayToDo,
+    );
+    projects.push(pholder);
+    appendToTab(pholder);
+    localStorage.setItem('Projects', JSON.stringify(projects));
+  }
 };
 
 const editToDo = (element) => {
@@ -444,6 +441,7 @@ const editToDo = (element) => {
   });
 
   addToDo.addEventListener('click', () => {
+    // eslint-disable-next-line no-use-before-define
     toDoForm(false);
   });
 
@@ -457,30 +455,14 @@ const editToDo = (element) => {
 
   submitB.addEventListener('click', () => {
     // eslint-disable-next-line no-use-before-define
-    validateForm();
-  });
-};
-
-const projectIndex = () => {
-  const indexHolder = document.createElement('div');
-  indexHolder.id = 'index-holder';
-  const projects = JSON.parse(localStorage.getItem('Projects'));
-  const main = document.getElementById('main-div');
-  for (let i = 0; i < projects.length; i += 1) {
-    const projectTitle = document.createElement('a');
-    projectTitle.classList.add('box', 'm-5', 'p-5', 'notification', 'is-info');
-    projectTitle.id = projects[i].id;
-    projectTitle.textContent = projects[i].title;
-    projectTitle.addEventListener('click', () => {
+    if (validateForm()) {
+      saveProject();
+      mainForm.remove();
+      const main = document.getElementById('main-div');
       deletePreviousContent(main);
-      // eslint-disable-next-line no-use-before-define
-      showProject(projects[i]);
-    });
-    indexHolder.append(projectTitle);
-  }
-
-  deletePreviousContent(main);
-  main.append(indexHolder);
+      projectIndex();
+    }
+  });
 };
 
 const showProject = (element) => {
@@ -536,6 +518,7 @@ const showProject = (element) => {
   addToDo.value = 'Add New ToDo';
   addToDo.classList.add('button', 'is-link', 'my-4');
   addToDo.addEventListener('click', () => {
+    // eslint-disable-next-line no-use-before-define
     toDoForm(element);
   });
 
@@ -632,136 +615,166 @@ const showProject = (element) => {
   mainDiv.append(toDoMain, buttonHolder);
 };
 
-
-const appendToContent = (object) => {
-  deletePreviousContent(document.getElementById('main-div'));
-  showProject(object);
-};
-
-const tabUpdate = (project) => {
-  const navigation = document.getElementById('project-navigation');
-  const tabList = document.getElementById('project-nav-list');
-  const pName = document.createElement('a');
-
-  pName.textContent = project.title;
-  const pList = document.createElement('li');
-  pList.id = project.id;
-
-  pList.addEventListener('click', () => {
-    appendToContent(findProject(project));
-  });
-  pList.appendChild(pName);
-  tabList.appendChild(pList);
-  navigation.appendChild(tabList);
-};
-
-const appendToTab = (object) => {
-  tabUpdate(object);
-};
-
-const saveProject = (element) => {
-  if (element != null) {
-    const actualProjectIndex = findProject(element, true);
-    const projects = JSON.parse(localStorage.getItem('Projects'));
-    const holderToDo = document.getElementById('to-do-holder');
-    let array = [];
-    let arrayChecklist = [];
-    let arrayCheck = [];
-    let priorityBoolean = false;
-    for (let i = 0; i < holderToDo.children.length; i += 1) {
-      const toDoDiv = holderToDo.children[i].children;
-      for (let j = 0; j < toDoDiv.length; j += 1) {
-        const element = toDoDiv[j];
-        if (element.tagName === 'LABEL') {
-          array.push(element.children[0].value);
-        } else if (element.tagName === 'DIV') {
-          if (element.classList.contains('radio-holder')) {
-            const radio = element.children[1].children;
-            for (let u = 0; u < radio.length; u += 1) {
-              const radioInput = radio[u].children[0];
-              if (radioInput.checked) {
-                array.push(radioInput.value);
-                priorityBoolean = true;
-              }
-            }
-            if (!priorityBoolean) {
-              array.push('medium');
-            }
-            priorityBoolean = false;
-          } else if (element.children[0] && !element.children[0].classList.contains('button')) {
-            const checkDiv = element.children;
-            for (let k = 0; k < checkDiv.length; k += 1) {
-              const checkElement = checkDiv[k].children[0];
-              arrayChecklist = checkElement.children[0].value;
-              arrayCheck.push(CheckList(uuidv4(), arrayChecklist));
-            }
-          }
-        }
-      }
-      projects[actualProjectIndex].toDo.push(ToDo(uuidv4(), ...array, arrayCheck));
-      array = [];
-      arrayCheck = [];
-    }
-    localStorage.setItem('Projects', JSON.stringify(projects));
-  } else {
-    const projectTitle = document.getElementById('pTitle').value;
-    const projectDescription = document.getElementById('pDescription').value;
-    const holderToDo = document.getElementById('to-do-holder');
-    let array = [];
-    let arrayChecklist = [];
-    let arrayCheck = [];
-    const arrayToDo = [];
-    let priorityBoolean = false;
-    for (let i = 0; i < holderToDo.children.length; i += 1) {
-      const toDoDiv = holderToDo.children[i].children;
-      for (let j = 0; j < toDoDiv.length; j += 1) {
-        const element = toDoDiv[j];
-        if (element.tagName === 'LABEL') {
-          array.push(element.children[0].value);
-        } else if (element.tagName === 'DIV') {
-          if (element.classList.contains('radio-holder')) {
-            const radio = element.children[1].children;
-            for (let u = 0; u < radio.length; u += 1) {
-              const radioInput = radio[u].children[0];
-              if (radioInput.checked) {
-                array.push(radioInput.value);
-                priorityBoolean = true;
-              }
-            }
-            if (!priorityBoolean) {
-              array.push('medium');
-            }
-            priorityBoolean = false;
-          } else {
-            const checkDiv = element.children;
-            for (let k = 0; k < checkDiv.length; k += 1) {
-              const checkElement = checkDiv[k].children[0];
-              arrayChecklist = checkElement.children[0].value;
-              arrayCheck.push(CheckList(uuidv4(), arrayChecklist));
-            }
-          }
-        }
-      }
-      arrayToDo.push(ToDo(uuidv4(), ...array, arrayCheck));
-      array = [];
-      arrayCheck = [];
-    }
-
-    const projects = JSON.parse(localStorage.getItem('Projects'));
-    const pholder = Project(
-      uuidv4(),
-      projectTitle,
-      projectDescription,
-      arrayToDo,
-    );
-    projects.push(pholder);
-    appendToTab(pholder);
-    localStorage.setItem('Projects', JSON.stringify(projects));
+const toDoForm = (edit) => {
+  let mainForm = document.getElementById('main-form');
+  const mainDiv = document.getElementById('main-div');
+  let toDoHolder = document.getElementById('to-do-holder');
+  if (edit) {
+    mainForm = document.createElement('div');
+    mainForm.id = 'main-form';
+    toDoHolder = document.createElement('div');
+    toDoHolder.id = 'to-do-holder';
   }
+  toDoHolder.style.position = 'relative';
+  toDoHolder.id = 'to-do-holder';
+  const formToDo = document.createElement('div');
+  formToDo.style.backgroundColor = 'skyblue';
+  formToDo.id = uuidv4();
+  formToDo.classList.add('box');
+  formToDo.style.position = 'relative';
+  const namePriority = uuidv4();
+
+  const pToDoTitle = document.createElement('input');
+  pToDoTitle.setAttribute('required', true);
+  pToDoTitle.placeholder = 'Add a title for something you need ToDo in this project.';
+  pToDoTitle.classList.add('input', 'is-small', 'is-info', 'input-form');
+  const pToDoTitleL = document.createElement('label');
+  pToDoTitleL.classList.add('label', 'is-small');
+
+  pToDoTitle.setAttribute('type', 'text');
+  pToDoTitleL.textContent = 'ToDo Title';
+  pToDoTitleL.appendChild(pToDoTitle);
+
+  const pToDoDescription = document.createElement('textarea');
+  pToDoDescription.placeholder = 'Add the description of this ToDo.';
+  pToDoDescription.classList.add('textarea', 'is-small', 'is-info', 'input-form');
+  pToDoDescription.rows = '5';
+  const pToDoDescriptionL = document.createElement('label');
+  pToDoDescriptionL.classList.add('label', 'is-small');
+
+  pToDoDescription.setAttribute('type', 'text');
+  pToDoDescriptionL.textContent = 'ToDo Description';
+  pToDoDescriptionL.appendChild(pToDoDescription);
+
+  const pToDoDueDate = document.createElement('input');
+  pToDoDueDate.classList.add('mx-2', 'is-small');
+  const pToDoDueDateL = document.createElement('label');
+  pToDoDueDateL.classList.add('is-small', 'is-info', 'label', 'input-form');
+
+  pToDoDueDate.setAttribute('type', 'date');
+  pToDoDueDateL.textContent = 'ToDo Due Date';
+  pToDoDueDateL.appendChild(pToDoDueDate);
+
+  const pToDoPriorityH = document.createElement('input');
+  pToDoPriorityH.classList.add('ml-1');
+  const pToDoPriorityHL = document.createElement('label');
+  pToDoPriorityHL.classList.add('is-small', 'label');
+
+  pToDoPriorityH.setAttribute('type', 'radio');
+  pToDoPriorityH.setAttribute('value', 'high');
+  pToDoPriorityH.setAttribute('name', `${namePriority}`);
+  pToDoPriorityHL.textContent = 'High';
+  pToDoPriorityHL.appendChild(pToDoPriorityH);
+
+  const pToDoPriorityM = document.createElement('input');
+  pToDoPriorityM.classList.add('ml-1');
+  const pToDoPriorityML = document.createElement('label');
+  pToDoPriorityML.classList.add('is-small', 'label');
+
+  pToDoPriorityM.setAttribute('type', 'radio');
+  pToDoPriorityM.setAttribute('value', 'medium');
+  pToDoPriorityM.setAttribute('name', `${namePriority}`);
+  pToDoPriorityML.textContent = 'Medium';
+  pToDoPriorityML.appendChild(pToDoPriorityM);
+
+  const pToDoPriorityL = document.createElement('input');
+  pToDoPriorityL.classList.add('ml-1');
+  const pToDoPriorityLL = document.createElement('label');
+  pToDoPriorityLL.classList.add('is-small', 'label');
+
+  pToDoPriorityL.setAttribute('type', 'radio');
+  pToDoPriorityL.setAttribute('value', 'low');
+  pToDoPriorityL.setAttribute('name', `${namePriority}`);
+  pToDoPriorityLL.textContent = 'Low';
+  pToDoPriorityLL.appendChild(pToDoPriorityL);
+
+  const radioHold = document.createElement('div');
+  radioHold.classList.toggle('radio-holder');
+  radioHold.classList.add('py-2');
+  const radioText = document.createElement('p');
+  radioText.classList.add('is-small', 'label');
+  radioText.textContent = 'Pick your ToDo level of priority';
+  const hold = document.createElement('div');
+  hold.append(pToDoPriorityHL, pToDoPriorityML, pToDoPriorityLL);
+  radioHold.append(radioText, hold);
+
+  const pToDoNotes = document.createElement('textarea');
+  pToDoNotes.placeholder = 'Here you can add some notes for the ToDo.';
+  pToDoNotes.classList.add('textarea', 'is-small', 'is-info', 'input-form');
+  pToDoNotes.row = '5';
+  const pToDoNotesL = document.createElement('label');
+  pToDoNotesL.textContent = 'Notes';
+  pToDoNotesL.classList.add('label', 'is-small', 'is-info');
+
+  pToDoNotesL.append(pToDoNotes);
+
+  const checkToDoHolder = document.createElement('div');
+  const addCheckTodo = document.createElement('input');
+  addCheckTodo.classList.add('is-link', 'button');
+  addCheckTodo.type = 'submit';
+  addCheckTodo.value = 'Add Check-ToDo (List of things you need to accomplish to finish the ToDo).';
+  addCheckTodo.addEventListener('click', () => {
+    checkToDo(checkToDoHolder);
+  });
+
+  const closeButton = document.createElement('span');
+  closeButton.style.position = 'absolute';
+  closeButton.style.top = '10px';
+  closeButton.style.right = '10px';
+  closeButton.classList.add('delete');
+  closeButton.style.cursor = 'pointer';
+  closeButton.classList.toggle = 'close';
+  closeButton.innerHTML = '&times;';
+
+  formToDo.append(
+    pToDoTitleL,
+    pToDoDescriptionL,
+    pToDoDueDateL,
+    radioHold,
+    pToDoNotesL,
+    closeButton,
+    addCheckTodo,
+    checkToDoHolder,
+  );
+  toDoHolder.append(formToDo);
+  mainForm.append(toDoHolder);
+  if (edit) {
+    mainDiv.append(toDoHolder);
+    const divHolder = document.createElement('div');
+    divHolder.classList.add('is-flex', 'is-justify-content-center', 'mt-3');
+    const submitToDo = document.createElement('input');
+    submitToDo.type = 'submit';
+    submitToDo.value = 'Add New ToDo';
+    submitToDo.classList.add('button', 'is-success', 'my-2');
+    submitToDo.addEventListener('click', () => {
+      // eslint-disable-next-line no-use-before-define
+      if (validateForm()) {
+        saveProject(edit);
+        mainForm.remove();
+        const main = document.getElementById('main-div');
+        deletePreviousContent(main);
+        showProject(findProject(edit));
+      }
+    });
+    divHolder.append(submitToDo);
+    formToDo.append(divHolder);
+  }
+  closeButton.addEventListener('click', () => {
+    deleteContent(formToDo);
+  });
 };
 
-const validateForm = (element) => {
-  const mainForm = document.createElement('div');
+const validateForm = () => {
   const input = [...document.getElementsByClassName('input-form')];
   if (input.some((element) => element.value === '')) {
     const modalError = document.createElement('div');
@@ -785,18 +798,11 @@ const validateForm = (element) => {
     modalErrorContent.append(p);
     modalError.append(modalErrorBg, buttonCloseModal, modalErrorContent);
     main.append(modalError);
-  } else {
-    saveProject(element);
-    mainForm.remove();
-    if (element) {
-      const main = document.getElementById('main-div');
-      deletePreviousContent(main);
-      showProject(findProject(element));
-    } else {
-      projectIndex();
-    }
+    return false;
   }
+  return true;
 };
+
 
 const tabCreation = () => {
   const navigation = document.createElement('nav');
@@ -892,10 +898,12 @@ const form = () => {
   main.append(mainForm, buttonHolder);
 
   submitB.addEventListener('click', () => {
-    validateForm();
+    if (validateForm()) {
+      saveProject();
+      projectIndex();
+    }
   });
 };
-
 
 const init = () => {
   const navbar = document.getElementById('navbar');
@@ -936,4 +944,5 @@ export {
   appendToTab,
   deletePreviousContent,
   deleteContent,
+  findProject,
 };
