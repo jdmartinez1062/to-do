@@ -621,7 +621,7 @@ const toDoForm = (edit) => {
     toDoHolder = document.createElement('div');
     toDoHolder.id = 'to-do-holder';
   }
-  
+
   toDoHolder.style.position = 'relative';
   toDoHolder.id = 'to-do-holder';
   const formToDo = document.createElement('div');
