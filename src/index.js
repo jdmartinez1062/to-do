@@ -8,7 +8,7 @@ window.onload = () => {
   // eslint-disable-next-line no-unused-vars
   let defaultProject = Project(
     uuidv4(),
-    'default',
+    'Default Project',
     'All project are show here',
     [
       ToDo(
@@ -30,7 +30,6 @@ window.onload = () => {
         '21-12-2020',
         'high',
         'First ToDo Note',
-        false,
       ),
     ],
   );

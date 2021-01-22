@@ -54,10 +54,11 @@ This is a project of the Javascript module. It is preceded by the lesson about O
 
 Project: JavaScript project, small list ToDo app. [Assignment link](https://www.theodinproject.com/courses/javascript/lessons/todo-list)
 
+
 Visit the finished project website: [Live](https://jdmartinez1062.github.io/to-do/)
 <div style="text-align:center">
   <a href="https://jdmartinez1062.github.io/to-do/">
-      <img src="dist/project.jpg" width="100%">
+      <img src="dist/project.gif" width="100%">
   </a>
 </div>
 
@@ -113,7 +114,9 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
+
 - Microverse for the opportunity.
+
 
 ## License
 
