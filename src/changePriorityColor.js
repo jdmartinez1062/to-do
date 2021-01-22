@@ -1,13 +1,11 @@
-
-
 function changePriority(element) {
   if (element.innerText.includes('high')) {
-    element.classList.toggle('is-danger')
+    element.classList.add('is-danger', 'box');
   } else if (element.innerText.includes('medium')) {
-    element.classList.toggle('is-warning')
+    element.classList.add('is-warning', 'box');
   } else {
-    element.classList.toggle('is-primary')
-  } 
+    element.classList.add('is-primary', 'box');
+  }
 }
 
-export default changePriority
+export default changePriority;

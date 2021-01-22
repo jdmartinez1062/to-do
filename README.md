@@ -54,10 +54,11 @@ This is a project of the Javascript module. It is preceded by the lesson about O
 
 Project: JavaScript project, small list ToDo app. [Assignment link](https://www.theodinproject.com/courses/javascript/lessons/todo-list)
 
-Visit the finished project website: add live link here
+
+Visit the finished project website: [Live](https://jdmartinez1062.github.io/to-do/)
 <div style="text-align:center">
-  <a href="add live link here">
-      <img src="screenshot.png" width="100%">
+  <a href="https://jdmartinez1062.github.io/to-do/">
+      <img src="dist/project.gif" width="100%">
   </a>
 </div>
 
@@ -113,7 +114,9 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- and Microverse for the opportunity.
+
+- Microverse for the opportunity.
+
 
 ## License
 
@@ -126,16 +129,16 @@ This project is [MIT](lic.url) licensed.
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/jdmartinez1062/Library.svg?style=flat-square
-[contributors-url]: https://github.com/jdmartinez1062/Library/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/jdmartinez1062/Library.svg?style=flat-square
-[forks-url]: https://github.com/jdmartinez1062/Library/network/members
-[stars-shield]: https://img.shields.io/github/stars/jdmartinez1062/Library.svg?style=flat-square
-[stars-url]: https://github.com/jdmartinez1062/Library/stargazers
-[issues-shield]: https://img.shields.io/github/issues/jdmartinez1062/Library.svg?style=flat-square
-[issues-url]: https://github.com/jdmartinez1062/Library/issues
-[license-shield]: https://img.shields.io/github/license/jdmartinez1062/Library.svg?style=flat-square
-[license-url]: https://github.com/jdmartinez1062/Library/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/jdmartinez1062/to-do.svg?style=flat-square
+[contributors-url]: https://github.com/jdmartinez1062/to-do/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/jdmartinez1062/to-do.svg?style=flat-square
+[forks-url]: https://github.com/jdmartinez1062/to-do/network/members
+[stars-shield]: https://img.shields.io/github/stars/jdmartinez1062/to-do.svg?style=flat-square
+[stars-url]: https://github.com/jdmartinez1062/to-do/stargazers
+[issues-shield]: https://img.shields.io/github/issues/jdmartinez1062/to-do.svg?style=flat-square
+[issues-url]: https://github.com/jdmartinez1062/to-do/issues
+[license-shield]: https://img.shields.io/github/license/jdmartinez1062/to-do.svg?style=flat-square
+[license-url]: https://github.com/jdmartinez1062/to-do/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [product-screenshot]: imgs/screenshot.jpg
