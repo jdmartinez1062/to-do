@@ -36,7 +36,7 @@ describe('updateLocalStorage and findProject should receive and find an item ele
   const projects = [testProject];
   localStorage.setItem('Projects', JSON.stringify(projects));
 
-  test('Expect findProject to get the right project from local storage with project a project object.', () => {
+  test('Expect findProject to get the right project from local storage with a project object.', () => {
     const changedProject = findProject(testProject);
     expect(testProject.id).toBe(changedProject.id);
   });
