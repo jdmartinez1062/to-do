@@ -19,4 +19,7 @@ describe("Test Project object creation", () => {
     test("todo attribute exists", () => {
         expect(!testP.toDo).toBe(false)
     })
+    test("todo to be instance of Array", () => {
+        expect(testP.toDo instanceof Array).toBe(true)
+    })
 })
