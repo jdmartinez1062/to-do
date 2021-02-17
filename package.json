@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npx webpack --watch",
     "build": "npx webpack --config webpack.config.js",
-    "server": "npx webpack serve"
+    "server": "npx webpack serve",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -19,12 +20,15 @@
   },
   "homepage": "https://github.com/jdmartinez1062/to-do#readme",
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.12.13",
     "webpack": "^5.10.3",
     "webpack-cli": "^4.2.0"
   },
   "dependencies": {
+    "babel-preset-env": "^1.7.0",
     "bulma": "^0.9.1",
     "date-fns": "^2.16.1",
+    "jest": "^26.6.3",
     "uuid": "^8.3.2",
     "webpack-dev-server": "^3.11.0"
   }
