@@ -7,7 +7,7 @@ describe('Test CheckList object creation', () => {
     expect(typeof CheckList).toBe('function');
   });
   test('Expect mock element from CheckList to return an object', () => {
-    expect(typeof checkListTrue).toBe('object');
+    expect(typeof checkListTest).toBe('object');
   });
   test('id attribute exists', () => {
     expect(!checkListTest.id).toBe(false);
