@@ -7,6 +7,7 @@ const updateLocalStorage = (element) => {
   }
   localStorage.setItem('Projects', JSON.stringify(projects));
 };
+
 const findProject = (project, index = false) => {
   const local = JSON.parse(localStorage.getItem('Projects'));
   for (let i = 0; i < local.length; i += 1) {
