@@ -1,40 +1,34 @@
-import CheckList from "../checkListObject";
 import { format } from 'date-fns';
+import CheckList from '../checkListObject';
 
-describe("Test To Do object creation", () => {
-    const testcheck = CheckList(1, "Test", "Description", "2021-03-20")
+describe('Test CheckList object creation', () => {
+  const checkListTrue = CheckList(1, 'Test', true);
+  const checkListFalse = CheckList(1, 'Test');
 
-    test("Expect testcheck to be an Object", () => {
-        expect(typeof testcheck === "object").toBe(true)
-    })
-    test("id attribute exists", () => {
-        expect(!testcheck.id).toBe(false)
-    })
-    test("title attribute exists", () => {
-        expect(!testcheck.title).toBe(false)
-    })
-    test("description attribute exists", () => {
-        expect(!testcheck.description).toBe(false)
-    })
-    test("dueDate attribute exists", () => {
-        expect(!testcheck.dueDate).toBe(false)
-    })
-    test("dueDate to be instance of Date", () => {
-        expect(typeof testcheck.dueDate === "string").toBe(true)
-    })
-    test("startDate attribute exists", () => {
-        expect(!testcheck.startDate).toBe(false)
-    })
-    test("startDate to be instance of Date", () => {
-        expect(testcheck.startDate).toBe(format(new Date(), 'yyyy-MM-dd'))
-    })
-    test("notes attribute exists", () => {
-        expect(testcheck.notes).toBe("")
-    })
-    test("checkList attribute exists", () => {
-        expect(!testcheck.checkList).toBe(false)
-    })
-    test("CheckList to be instance of Array", () => {
-        expect(testcheck.checkList instanceof Array).toBe(true)
-    })
-})
+  test('Expect CheckList to be an function', () => {
+    expect(typeof CheckList).toBe('function');
+  });
+  test('Expect mock element from CheckList to return an object', () => {
+    expect(typeof checkListTrue).toBe('object');
+  });
+  test('id attribute exists', () => {
+    expect(!checkListTrue.id).toBe(false);
+  });
+  test('title attribute exists', () => {
+    expect(!checkListTrue.title).toBe(false);
+  });
+  test('status attribute exists', () => {
+    expect(!checkListTrue.status).toBe(false);
+  });
+  test('statusToggle function to exist within the object', () => {
+    expect(typeof checkListTrue.statusToggle).toBe('function');
+  });
+  test('toggle status, if mock element has true in status it returns false', () => {
+    checkListTrue.statusToggle();
+    expect(checkListTrue.status).toBe(false);
+  });
+  test('toggle status, if mock element has false in status it returns true', () => {
+    checkListFalse.statusToggle();
+    expect(checkListFalse.status).toBe(true);
+  });
+});
