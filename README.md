@@ -77,10 +77,15 @@ Visit the finished project website: [Live](https://jdmartinez1062.github.io/to-d
 ```sh
 git clone https://github.com/jdmartinez1062/to-do
 ```
+
+2. In order to install all dependencies, run:
+
+    `npm install` or `yarn install`
+
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-1. Open local server.
+1. To run it locally run `npm server`.
 
 2. Click the button "New Project"
 
