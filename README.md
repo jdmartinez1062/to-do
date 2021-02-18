@@ -32,17 +32,18 @@
 
 ## Table of Contents
 
-- [Table of Contents](#table-of-contents)
-- [About The Project](#about-the-project)
-  - [Built With](#built-with)
-- [Getting Started](#getting-started)
-  - [Installation](#installation)
-- [Usage](#usage)
-- [Contact](#contact)
-- [Contributing](#contributing)
-- [Show your support](#show-your-support)
-- [Acknowledgments](#acknowledgments)
-- [License](#license)
+1. [Table of Contents](#table-of-contents)
+2. [About The Project](#about-the-project)
+   1. [Built With](#built-with)
+3. [Getting Started](#getting-started)
+   1. [Installation](#installation)
+4. [Usage](#usage)
+5. [Test](#test)
+6. [Contact](#contact)
+7. [Contributing](#contributing)
+8. [Show your support](#show-your-support)
+9. [Acknowledgments](#acknowledgments)
+10. [License](#license)
 
 <!-- ABOUT THE PROJECT -->
 
@@ -95,12 +96,21 @@ git clone https://github.com/jdmartinez1062/to-do
    
 8. On the Project Index tab, you can check every project created. 
 
+## Test
+ 
+In order to test, you need to install `Jest`. In order to do this, run:
+
+    npm install jest
+
+In order to run tests, use:
+
+    npm test
+
 ## Contact
 
 Juan David Martínez Cubillos - jd.martinez1062@gmail.com
 
 Carlos Henrique da Veiga - carlosveigadev@gmail.com
-
 
 ## Contributing
 
@@ -114,9 +124,7 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-
 - Microverse for the opportunity.
-
 
 ## License
 
