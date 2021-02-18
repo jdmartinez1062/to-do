@@ -2,7 +2,9 @@ import { findProject } from '../localStorageUpdate';
 import ToDo from '../to-do-object';
 import Project from '../project';
 import CheckList from '../checkListObject';
-import { mockSaveProject, mockEditToDo } from './mockFunctions';
+import {
+  mockSaveProject, mockEditToDo, mockDeleteToDo, mockCreateToDo,
+} from './mockFunctions';
 
 describe('Test new, edit and delete Project ', () => {
   document.body.innerHTML = `<div id="main-form">
@@ -89,6 +91,7 @@ describe('Test new, edit and delete Project ', () => {
     mockSaveProject();
     expect(JSON.parse(localStorage.getItem('Projects')).length).toBe(1);
   });
+
   test('Expect to sequence of function to mock the edit dom manipulation of the project.', () => {
     const projects = [testProject];
     localStorage.setItem('Projects', JSON.stringify(projects));
@@ -97,5 +100,34 @@ describe('Test new, edit and delete Project ', () => {
     mockEditToDo(oldProject);
     const loadedProject = JSON.parse(localStorage.getItem('Projects'))[0];
     expect(loadedProject.title).toBe('Changed');
+  });
+
+  test('Expect to create a new toDo into an existent project with 2 toDos.', () => {
+    const projects = [testProject];
+    localStorage.setItem('Projects', JSON.stringify(projects));
+    const oldProject = JSON.parse(localStorage.getItem('Projects'))[0];
+    const newToDo = ToDo(
+      3,
+      'New ToDo',
+      'New ToDo Description',
+      '18/02/2021',
+      'high',
+      'New ToDo Note',
+      [
+        CheckList(3, 'first checklist', false),
+        CheckList(4, 'second checklist', true),
+      ],
+    );
+    mockCreateToDo(oldProject, newToDo);
+    const loadedProject = JSON.parse(localStorage.getItem('Projects'))[0];
+    expect(loadedProject.toDo.length).toBe(3);
+  });
+
+  test('Expect to delete 1 toDo of the default project with 2 toDos', () => {
+    const projects = [testProject];
+    localStorage.setItem('Projects', JSON.stringify(projects));
+    mockDeleteToDo(testProject, testProject.toDo[0]);
+    const loadedProject = JSON.parse(localStorage.getItem('Projects'))[0];
+    expect(loadedProject.toDo.length).toBe(1);
   });
 });

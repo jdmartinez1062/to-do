@@ -2,7 +2,8 @@ import { v4 as uuidv4 } from 'uuid';
 import ToDo from '../to-do-object';
 import Project from '../project';
 import CheckList from '../checkListObject';
-import { findProject } from '../localStorageUpdate';
+import { findProject, updateLocalStorage } from '../localStorageUpdate';
+import { findToDo } from '../DOM';
 
 const mockSaveProject = (element) => {
   if (element != null) {
@@ -104,7 +105,6 @@ const mockSaveProject = (element) => {
   }
 };
 
-
 const mockEditToDo = (element) => {
   const actualP = findProject(element, true);
   const projects = JSON.parse(localStorage.getItem('Projects'));
@@ -113,4 +113,20 @@ const mockEditToDo = (element) => {
   localStorage.setItem('Projects', JSON.stringify(projects));
 };
 
-export { mockSaveProject, mockEditToDo };
+const mockDeleteToDo = (element, toDo) => {
+  const toDoIndex = findToDo(element, toDo, true);
+  element.toDo.splice(toDoIndex, 1);
+  updateLocalStorage(element);
+};
+
+const mockCreateToDo = (element, toDo) => {
+  element.toDo.push(toDo);
+  updateLocalStorage(element);
+};
+
+export {
+  mockSaveProject,
+  mockEditToDo,
+  mockDeleteToDo,
+  mockCreateToDo,
+};

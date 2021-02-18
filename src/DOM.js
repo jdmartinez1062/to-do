@@ -944,4 +944,5 @@ export {
   findProject,
   saveProject,
   editToDo,
+  findToDo,
 };
