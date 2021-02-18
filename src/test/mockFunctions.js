@@ -124,9 +124,27 @@ const mockCreateToDo = (element, toDo) => {
   updateLocalStorage(element);
 };
 
+const mockStatusChange = (project, toDo, checkList) => {
+  for (let i = 0; i < project.toDo.length; i += 1) {
+    if (project.toDo[i].id === toDo.id) {
+      const actualToDo = project.toDo[i];
+      for (let j = 0; j < actualToDo.checkList.length; j += 1) {
+        if (actualToDo.checkList[j].id === checkList.id) {
+          let actualCheckList = actualToDo.checkList[j];
+          actualCheckList = actualToDo.checkList[j];
+          actualCheckList.status = !actualCheckList.status;
+          updateLocalStorage(project);
+          actualCheckList.status = !actualCheckList.status;
+        }
+      }
+    }
+  }
+};
+
 export {
   mockSaveProject,
   mockEditToDo,
   mockDeleteToDo,
   mockCreateToDo,
+  mockStatusChange,
 };

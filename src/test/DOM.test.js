@@ -3,7 +3,7 @@ import ToDo from '../to-do-object';
 import Project from '../project';
 import CheckList from '../checkListObject';
 import {
-  mockSaveProject, mockEditToDo, mockDeleteToDo, mockCreateToDo,
+  mockSaveProject, mockEditToDo, mockDeleteToDo, mockCreateToDo, mockStatusChange,
 } from './mockFunctions';
 
 describe('Test new, edit and delete Project ', () => {
@@ -121,6 +121,16 @@ describe('Test new, edit and delete Project ', () => {
     mockCreateToDo(oldProject, newToDo);
     const loadedProject = JSON.parse(localStorage.getItem('Projects'))[0];
     expect(loadedProject.toDo.length).toBe(3);
+  });
+
+  test('Expect to change the status of a specific checklist', () => {
+    const projects = [testProject];
+    localStorage.setItem('Projects', JSON.stringify(projects));
+    mockStatusChange(testProject, testProject.toDo[0], testProject.toDo[0].checkList[0]);
+
+    const loadedProject = JSON.parse(localStorage.getItem('Projects'))[0];
+    expect(loadedProject.toDo[0].checkList[0].status)
+      .toBe(!testProject.toDo[0].checkList[0].status);
   });
 
   test('Expect to delete 1 toDo of the default project with 2 toDos', () => {
