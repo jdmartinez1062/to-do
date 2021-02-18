@@ -21,6 +21,7 @@
   "homepage": "https://github.com/jdmartinez1062/to-do#readme",
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.12.13",
+    "@testing-library/jest-dom": "^5.11.9",
     "webpack": "^5.10.3",
     "webpack-cli": "^4.2.0"
   },
