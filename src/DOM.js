@@ -113,7 +113,6 @@ const projectIndex = () => {
 };
 
 const saveProject = (element) => {
-  console.log(element)
   if (element != null) {
     const actualProjectIndex = findProject(element, true);
     const projects = JSON.parse(localStorage.getItem('Projects'));
@@ -944,5 +943,5 @@ export {
   deleteContent,
   findProject,
   saveProject,
-  editToDo
+  editToDo,
 };

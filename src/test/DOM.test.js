@@ -1,13 +1,11 @@
-import { findProject } from '../localStorageUpdate'
+import { findProject } from '../localStorageUpdate';
 import ToDo from '../to-do-object';
 import Project from '../project';
 import CheckList from '../checkListObject';
-import { mockSaveProject, mockEditToDo } from './mockFunctions'
+import { mockSaveProject, mockEditToDo } from './mockFunctions';
 
-describe("Test new, edit and delete Project ", () => {
-
-    document.body.innerHTML =
-        `<div id="main-form">
+describe('Test new, edit and delete Project ', () => {
+  document.body.innerHTML = `<div id="main-form">
         <div>
         <h2>Project Info</h2>
         <label class="label">Title<input class="input" placeholder="Add a title for your new project." type="text" id="pTitle"></label>
@@ -43,66 +41,61 @@ describe("Test new, edit and delete Project ", () => {
         </textarea><grammarly-extension style="position: absolute; top: 0px; left: 0px; pointer-events: none; z-index: auto;" class="cGcvT"></grammarly-extension></label>
         <span style="position: absolute; top: 10px; right: 10px; cursor: pointer;" class="delete">×</span>
         <input class="is-link button" type="submit" value="Add Check-ToDo (List of things you need to accomplish to finish the ToDo)."><div></div></div></div></div>
-        <div class="is-flex is-justify-content-space-between"><input type="submit" value="Add New ToDo" class="button is-link is-light is-outlined my-4"><input type="submit" value="Create new Project" class="button is-success is-align-self-center"></div>`
+        <div class="is-flex is-justify-content-space-between"><input type="submit" value="Add New ToDo" class="button is-link is-light is-outlined my-4"><input type="submit" value="Create new Project" class="button is-success is-align-self-center"></div>`;
 
-
-
-    const testProject = Project(
-        1,
-        'Default Project',
-        'All project are show here',
+  const testProject = Project(
+    1,
+    'Default Project',
+    'All project are show here',
+    [
+      ToDo(
+        2,
+        'First Todo',
+        'First Todo Description',
+        '21-12-2020',
+        'high',
+        'First ToDo Note',
         [
-            ToDo(
-                2,
-                'First Todo',
-                'First Todo Description',
-                '21-12-2020',
-                'high',
-                'First ToDo Note',
-                [
-                    CheckList(3, 'first checklist', false),
-                    CheckList(4, 'second checklist', true),
-                ],
-            ),
-            ToDo(
-                5,
-                'Second Todo',
-                'Second Todo Description',
-                '21-12-2020',
-                'high',
-                'First ToDo Note',
-            ),
+          CheckList(3, 'first checklist', false),
+          CheckList(4, 'second checklist', true),
         ],
-    );
+      ),
+      ToDo(
+        5,
+        'Second Todo',
+        'Second Todo Description',
+        '21-12-2020',
+        'high',
+        'First ToDo Note',
+      ),
+    ],
+  );
 
+  const projects = [testProject];
+  localStorage.setItem('Projects', JSON.stringify(projects));
+
+  const deleteProject = (element) => {
+    const actualP = findProject(element, true);
+    const projects = JSON.parse(localStorage.getItem('Projects'));
+    projects.splice(actualP, 1);
+    localStorage.setItem('Projects', JSON.stringify(projects));
+  };
+
+  test('Expect project to be removed from localStorage', () => {
+    deleteProject(testProject);
+    expect(localStorage.getItem('Projects')).toBe('[]');
+  });
+  test('Expect to save a project', () => {
+    mockSaveProject();
+    expect(JSON.parse(localStorage.getItem('Projects')).length).toBe(1);
+  });
+  test('Expect to sequence of function to mock the edit dom manipulation of the project.', () => {
     const projects = [testProject];
     localStorage.setItem('Projects', JSON.stringify(projects));
-
-    const deleteProject = (element) => {
-        const actualP = findProject(element, true);
-        const projects = JSON.parse(localStorage.getItem('Projects'));
-        projects.splice(actualP, 1);
-        localStorage.setItem('Projects', JSON.stringify(projects));
-    }
-
-    test("Expect project to be removed from localStorage", () => {
-        deleteProject(testProject);
-        expect(localStorage.getItem('Projects')).toBe('[]')
-    })
-    test("Expect to save a project", () => {
-        mockSaveProject();
-        expect(JSON.parse(localStorage.getItem('Projects')).length).toBe(1);
-    })
-    test("Expect to edit a project", () => {
-
-        const projects = [testProject];
-        localStorage.setItem('Projects', JSON.stringify(projects));
-        const oldProject = JSON.parse(localStorage.getItem('Projects'))[0];
-        console.log(oldProject)
-        oldProject.title = "Changed"
-        mockEditToDo(oldProject);
-        const loadedProject = JSON.parse(localStorage.getItem('Projects'))[0];
-        expect(loadedProject.title).toBe('Changed');
-    })
-
-})
+    const oldProject = JSON.parse(localStorage.getItem('Projects'))[0];
+    oldProject.title = 'Changed';
+    mockEditToDo(oldProject);
+    const loadedProject = JSON.parse(localStorage.getItem('Projects'))[0];
+    expect(loadedProject.title).toBe('Changed');
+  });
+});
